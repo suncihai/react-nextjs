@@ -12748,7 +12748,7 @@ function (_App) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12760,26 +12760,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementCount", function() { return incrementCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decrementCount", function() { return decrementCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetCount", function() { return resetCount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPartners", function() { return getPartners; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var exampleInitialState = {
+var InitialState = {
   lastUpdate: 0,
   light: false,
-  count: 0
+  count: 0,
+  partners: {}
 };
 var actionTypes = {
   TICK: 'TICK',
   INCREMENT: 'INCREMENT',
   DECREMENT: 'DECREMENT',
-  RESET: 'RESET' // REDUCERS
+  RESET: 'RESET',
+  GETPARTNERS: 'GETPARTNERS' // REDUCERS
 
 };
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exampleInitialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : InitialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
@@ -12801,7 +12804,12 @@ var reducer = function reducer() {
 
     case actionTypes.RESET:
       return Object.assign({}, state, {
-        count: exampleInitialState.count
+        count: InitialState.count
+      });
+
+    case actionTypes.GETPARTNERS:
+      return Object.assign({}, state, {
+        partners: action.payload
       });
 
     default:
@@ -12838,8 +12846,14 @@ var resetCount = function resetCount() {
     type: actionTypes.RESET
   };
 };
+var getPartners = function getPartners(data) {
+  return {
+    type: actionTypes.GETPARTNERS,
+    payload: data
+  };
+};
 function initializeStore() {
-  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exampleInitialState;
+  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : InitialState;
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])()));
 }
 

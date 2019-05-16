@@ -648,10 +648,6 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Partners)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      partners: {}
-    });
-
     _defineProperty(_assertThisInitialized(_this), "getPartners",
     /*#__PURE__*/
     _asyncToGenerator(
@@ -679,11 +675,7 @@ function (_React$Component) {
               ret = _context.sent;
 
               if (ret.success) {
-                _this.setState({
-                  partners: ret.data
-                }, function () {
-                  console.log('partners', _this.state.partners);
-                });
+                _this.props.getPartners(ret.data);
               }
 
             case 6:
@@ -715,12 +707,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var partners = this.state.partners;
-
-      if (!partners.agencies) {
+      if (!this.props.partners.agencies) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(PartnerContainer, null, partners.agencies.map(function (ele) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(PartnerContainer, null, this.props.partners.agencies.map(function (ele) {
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(PartnerWrap, {
             key: ele.img
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -729,18 +719,8 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
             src: ele.img
           })));
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_example__WEBPACK_IMPORTED_MODULE_8__["default"], null));
+        }));
       }
-    }
-  }], [{
-    key: "getInitialProps",
-    value: function getInitialProps(_ref2) {
-      var reduxStore = _ref2.reduxStore,
-          req = _ref2.req;
-      var isServer = !!req; // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
-
-      reduxStore.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["serverRenderClock"])(isServer));
-      return {};
     }
   }]);
 
@@ -748,9 +728,18 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
 var mapDispatchToProps = {
-  startClock: _store__WEBPACK_IMPORTED_MODULE_7__["startClock"]
+  startClock: _store__WEBPACK_IMPORTED_MODULE_7__["startClock"],
+  getPartners: _store__WEBPACK_IMPORTED_MODULE_7__["getPartners"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(null, mapDispatchToProps)(Partners));
+
+var mapStateToProps = function mapStateToProps(_ref2) {
+  var partners = _ref2.partners;
+  return {
+    partners: partners
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(Partners));
 
 /***/ }),
 
@@ -1059,7 +1048,7 @@ function (_React$Component) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1071,6 +1060,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementCount", function() { return incrementCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decrementCount", function() { return decrementCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetCount", function() { return resetCount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPartners", function() { return getPartners; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
@@ -1078,20 +1068,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var exampleInitialState = {
+var InitialState = {
   lastUpdate: 0,
   light: false,
-  count: 0
+  count: 0,
+  partners: {}
 };
 var actionTypes = {
   TICK: 'TICK',
   INCREMENT: 'INCREMENT',
   DECREMENT: 'DECREMENT',
-  RESET: 'RESET' // REDUCERS
+  RESET: 'RESET',
+  GETPARTNERS: 'GETPARTNERS' // REDUCERS
 
 };
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exampleInitialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : InitialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
@@ -1113,7 +1105,12 @@ var reducer = function reducer() {
 
     case actionTypes.RESET:
       return Object.assign({}, state, {
-        count: exampleInitialState.count
+        count: InitialState.count
+      });
+
+    case actionTypes.GETPARTNERS:
+      return Object.assign({}, state, {
+        partners: action.payload
       });
 
     default:
@@ -1150,8 +1147,14 @@ var resetCount = function resetCount() {
     type: actionTypes.RESET
   };
 };
+var getPartners = function getPartners(data) {
+  return {
+    type: actionTypes.GETPARTNERS,
+    payload: data
+  };
+};
 function initializeStore() {
-  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exampleInitialState;
+  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : InitialState;
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])()));
 }
 

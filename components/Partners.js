@@ -2,9 +2,8 @@ import axios from 'axios';
 import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
-
 import { connect } from 'react-redux'
-import { startClock, serverRenderClock } from '../store'
+import { startClock, serverRenderClock, getPartners } from '../store'
 import Examples from '../components/example'
 
 const PartnerContainer = styled.div`
@@ -26,17 +25,6 @@ const PartnerWrap = styled.div`
    }
 `
 class Partners extends React.Component {
-   state = {
-      partners: {}
-   }
-
-   static getInitialProps ({ reduxStore, req }) {
-      const isServer = !!req
-      // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
-      reduxStore.dispatch(serverRenderClock(isServer))
-  
-      return {}
-   }
 
    componentDidMount() {
       this.getPartners()
@@ -63,39 +51,35 @@ class Partners extends React.Component {
       })
 
       if (ret.success) {
-         this.setState({
-            partners: ret.data
-         },()=>{
-            console.log('partners', this.state.partners)
-         })
+         this.props.getPartners(ret.data)
       } 
 
    }
 
    render(){ 
-      const { partners } = this.state
-      if(!partners.agencies) {
+      if(!this.props.partners.agencies) {
          return <Loading /> 
       }else{
          return (
            <PartnerContainer>
-            { partners.agencies.map( ele =>
+            { this.props.partners.agencies.map( ele =>
                <PartnerWrap key={ele.img}>
                   <a href={ele.url} target="_blank">
                      <img src={ele.img}/>
                   </a>
                </PartnerWrap>
             )}
-            <Examples />
+            {/* <Examples /> */}
            </PartnerContainer>
          )
       }
    }
 }
 
-const mapDispatchToProps = { startClock }
+const mapDispatchToProps = { startClock, getPartners }
+const mapStateToProps = ({partners}) => ({partners})
 
 export default connect(
-   null,
+   mapStateToProps,
    mapDispatchToProps
  )(Partners)
