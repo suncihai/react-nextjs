@@ -3,6 +3,10 @@ import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 
+import { connect } from 'react-redux'
+import { startClock, serverRenderClock } from '../store'
+import Examples from '../components/example'
+
 const PartnerContainer = styled.div`
    width: 1000px;
    margin: 0 auto;
@@ -26,9 +30,22 @@ class Partners extends React.Component {
       partners: {}
    }
 
+   static getInitialProps ({ reduxStore, req }) {
+      const isServer = !!req
+      // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
+      reduxStore.dispatch(serverRenderClock(isServer))
+  
+      return {}
+   }
+
    componentDidMount() {
       this.getPartners()
+      this.timer = setInterval(() => this.props.startClock(), 1000)
    }
+
+   componentWillUnmount () {
+      clearInterval(this.timer)
+    }
 
    getPartners = async () => {
       const timestamp = new Date().getTime();
@@ -69,10 +86,16 @@ class Partners extends React.Component {
                   </a>
                </PartnerWrap>
             )}
+            <Examples />
            </PartnerContainer>
          )
       }
    }
 }
 
-export default Partners;
+const mapDispatchToProps = { startClock }
+
+export default connect(
+   null,
+   mapDispatchToProps
+ )(Partners)
