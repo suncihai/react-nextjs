@@ -5,6 +5,7 @@ import Loading from '../components/Loading'
 import { connect } from 'react-redux'
 import { startClock, serverRenderClock, getPartners } from '../store'
 import Examples from '../components/example'
+import { websocketSub } from '../common/js/rx-websocket'
 
 const PartnerContainer = styled.div`
    width: 1000px;
@@ -29,6 +30,12 @@ class Partners extends React.Component {
    componentDidMount() {
       this.getPartners()
       this.timer = setInterval(() => this.props.startClock(), 1000)
+
+      const subItems = websocketSub.getSubItems()
+      const accSubject = websocketSub.createSubject({
+        subscribe: 'according',
+        local: 'en_US',
+      })
    }
 
    componentWillUnmount () {

@@ -205,6 +205,173 @@ axiosClient.interceptors.response.use(function (res) {
 
 /***/ }),
 
+/***/ "./common/js/rx-websocket.js":
+/*!***********************************!*\
+  !*** ./common/js/rx-websocket.js ***!
+  \***********************************/
+/*! exports provided: websocketSub */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "websocketSub", function() { return websocketSub; });
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "rxjs");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./common/js/utils.js");
+
+
+var wsSubject;
+var ws; //websocket实例
+
+var lockReconnect = false; //避免重复连接
+
+var wsUrl = 'wss://ws-manager-v2-dev-d981hkl2m.bitmart.com';
+var subItems = [];
+var websocketSub = {
+  createSubject: function createSubject(subscribeObj) {
+    if (!wsSubject) {
+      wsSubject = getWsSubject();
+    }
+
+    if (!ws) {
+      ws = getWebSocketInstance();
+    }
+
+    if (ws && +ws.readyState === 1) {
+      ws.send(JSON.stringify(subscribeObj)); // cancel 不加监听
+
+      if (subscribeObj.subscribe.indexOf('_cancel') >= 0) {
+        return wsSubject;
+      }
+    }
+
+    var rmIndex = subItems.findIndex(function (item, rmIndex) {
+      if (item.subscribe === subscribeObj.subscribe) {
+        var keysArr = Object.keys(item.subscribeObj);
+        var allEqual = true;
+        keysArr.forEach(function (key) {
+          if (item.subscribeObj[key] !== subscribeObj[key]) {
+            allEqual = false;
+          }
+        });
+
+        if (allEqual) {
+          return true;
+        }
+      }
+    }); //如果未找到
+
+    if (rmIndex < 0) {
+      subItems.push({
+        subscribe: subscribeObj.subscribe,
+        subscribeObj: subscribeObj
+      });
+    }
+
+    return wsSubject;
+  },
+  // 不要直接操作其中元素
+  getSubItems: function getSubItems() {
+    return subItems;
+  },
+  getSocketSub: function getSocketSub() {
+    if (!wsSubject) {
+      wsSubject = getWsSubject();
+    }
+
+    return wsSubject;
+  }
+};
+
+var getWsSubject = function getWsSubject() {
+  if (!wsSubject) {
+    wsSubject = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
+  }
+
+  return wsSubject;
+};
+
+var getWebSocketInstance = function getWebSocketInstance() {
+  try {
+    ws = new WebSocket(wsUrl);
+    initEventHandle();
+    return ws;
+  } catch (e) {
+    console.log(e);
+    reconnect();
+  }
+};
+
+var initEventHandle = function initEventHandle() {
+  ws.onclose = function () {
+    reconnect();
+  };
+
+  ws.onerror = function () {
+    reconnect();
+  };
+
+  ws.onopen = function () {
+    //心跳检测重置
+    heartCheck.reset().start();
+    subItems.forEach(function (sub) {
+      ws.send(JSON.stringify(sub.subscribeObj));
+    }); // 去掉cacel
+
+    subItems = subItems.filter(function (sub) {
+      return sub.subscribe.indexOf('_cancel') < 0;
+    });
+  };
+
+  ws.onmessage = function (event) {
+    if (!wsSubject) {
+      return;
+    }
+
+    if (event.data) {
+      try {
+        var wsres = JSON.parse(event.data);
+        wsSubject.next(wsres);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+};
+
+var reconnect = function reconnect() {
+  if (lockReconnect) return;
+  lockReconnect = true; //没连接上会一直重连，设置延迟避免请求过多
+
+  setTimeout(function () {
+    getWebSocketInstance();
+    lockReconnect = false;
+  }, 1000);
+}; //心跳检测
+
+
+var heartCheck = {
+  timeout: 20000,
+  timeoutInt: null,
+  reset: function reset() {
+    clearTimeout(this.timeoutInt);
+    return this;
+  },
+  start: function start() {
+    this.timeoutInt = setInterval(function () {
+      //这里发送一个心跳，后端收到后，返回一个心跳消息，
+      //onmessage拿到返回的心跳就说明连接正常
+      try {
+        ws.send('{"subscribe": "ping"}');
+      } catch (e) {
+        console.log(e);
+      }
+    }, this.timeout);
+  }
+};
+
+/***/ }),
+
 /***/ "./common/js/utils.js":
 /*!****************************!*\
   !*** ./common/js/utils.js ***!
@@ -536,14 +703,20 @@ var Layout = function Layout(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/lib/icon */ "antd/lib/icon");
-/* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(antd_lib_icon__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd_lib_spin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/lib/spin */ "antd/lib/spin");
-/* harmony import */ var antd_lib_spin__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd_lib_spin__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var antd_lib_icon_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/lib/icon/style/css */ "antd/lib/icon/style/css");
+/* harmony import */ var antd_lib_icon_style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(antd_lib_icon_style_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/lib/icon */ "antd/lib/icon");
+/* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd_lib_icon__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var antd_lib_spin_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/lib/spin/style/css */ "antd/lib/spin/style/css");
+/* harmony import */ var antd_lib_spin_style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd_lib_spin_style_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var antd_lib_spin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/lib/spin */ "antd/lib/spin");
+/* harmony import */ var antd_lib_spin__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd_lib_spin__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_5__);
+
+
 
 
 
@@ -561,10 +734,10 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var LoadingWrap = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div(_templateObject());
-var Spin = antd_lib_spin__WEBPACK_IMPORTED_MODULE_1___default.a,
-    Icon = antd_lib_icon__WEBPACK_IMPORTED_MODULE_0___default.a;
-var antIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Icon, {
+var LoadingWrap = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div(_templateObject());
+var Spin = antd_lib_spin__WEBPACK_IMPORTED_MODULE_3___default.a,
+    Icon = antd_lib_icon__WEBPACK_IMPORTED_MODULE_1___default.a;
+var antIcon = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Icon, {
   type: "loading",
   style: {
     fontSize: 24,
@@ -573,7 +746,7 @@ var antIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Icon, {
 });
 
 var Loading = function Loading() {
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(LoadingWrap, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Spin, {
+  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(LoadingWrap, null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Spin, {
     indicator: antIcon
   })));
 };
@@ -605,6 +778,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store */ "./store.js");
 /* harmony import */ var _components_example__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/example */ "./components/example.js");
+/* harmony import */ var _common_js_rx_websocket__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/js/rx-websocket */ "./common/js/rx-websocket.js");
 
 
 
@@ -653,6 +827,7 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 
 
 
@@ -732,6 +907,11 @@ function (_React$Component) {
       this.timer = setInterval(function () {
         return _this2.props.startClock();
       }, 1000);
+      var subItems = _common_js_rx_websocket__WEBPACK_IMPORTED_MODULE_9__["websocketSub"].getSubItems();
+      var accSubject = _common_js_rx_websocket__WEBPACK_IMPORTED_MODULE_9__["websocketSub"].createSubject({
+        subscribe: 'according',
+        local: 'en_US'
+      });
     }
   }, {
     key: "componentWillUnmount",
@@ -1247,6 +1427,17 @@ module.exports = require("antd/lib/icon");
 
 /***/ }),
 
+/***/ "antd/lib/icon/style/css":
+/*!******************************************!*\
+  !*** external "antd/lib/icon/style/css" ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("antd/lib/icon/style/css");
+
+/***/ }),
+
 /***/ "antd/lib/spin":
 /*!********************************!*\
   !*** external "antd/lib/spin" ***!
@@ -1255,6 +1446,17 @@ module.exports = require("antd/lib/icon");
 /***/ (function(module, exports) {
 
 module.exports = require("antd/lib/spin");
+
+/***/ }),
+
+/***/ "antd/lib/spin/style/css":
+/*!******************************************!*\
+  !*** external "antd/lib/spin/style/css" ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("antd/lib/spin/style/css");
 
 /***/ }),
 
@@ -1365,6 +1567,17 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "rxjs":
+/*!***********************!*\
+  !*** external "rxjs" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("rxjs");
 
 /***/ }),
 
