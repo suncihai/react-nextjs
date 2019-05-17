@@ -1,7 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Layout from '../components/Layout'
 import Partners from '../components/Partners'
 import styled from 'styled-components'
 import bannerImg from '../assets/img/partners_bg.jpg'
@@ -49,32 +47,18 @@ const Container = styled.div`
 class Index extends React.Component {
    render(){
       return (
-        <Body>
-          <style jsx global>{`
-            body,html,h1,h2,h3,h4,h5,p{
-              margin: 0;
-              padding: 0;
-            }
-            ul {
-              list-style: none;
-              margin: 0;
-              padding: 0;
-            }
-            a {
-              text-decoration: none;
-            }
-          `}</style>
-          <Header />
-          <Container className="banner-container">
-             <div className="title">
-                <h3>Our Partners</h3>
-                <p>BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place.</p>
-                <a href="https://www.wrike.com/frontend/requestforms/index.html?token=eyJhY2NvdW50SWQiOjE5MTAzNTgsInRhc2tGb3JtSWQiOjE5OTA1N30JNDcwNjAxOTM4ODQxMQk1NGM2NWI1MDA4MTc1YjEwMDAwYWQ0MzA4ZWIxY2E5MTBlNDFmMjg0YWNjZjc0ZmY3YzFhZWNhODc4ZWNmYjVl" target="_blank">Be Our Partner</a>
-             </div>
-          </Container>
-          <Partners />
-          <Footer />
-        </Body>
+        <Layout>
+          <Body>
+            <Container className="banner-container">
+              <div className="title">
+                  <h3>Our Partners</h3>
+                  <p>BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place.</p>
+                  <a href="https://www.wrike.com/frontend/requestforms/index.html?token=eyJhY2NvdW50SWQiOjE5MTAzNTgsInRhc2tGb3JtSWQiOjE5OTA1N30JNDcwNjAxOTM4ODQxMQk1NGM2NWI1MDA4MTc1YjEwMDAwYWQ0MzA4ZWIxY2E5MTBlNDFmMjg0YWNjZjc0ZmY3YzFhZWNhODc4ZWNmYjVl" target="_blank">Be Our Partner</a>
+              </div>
+            </Container>
+            <Partners />
+          </Body>
+        </Layout>
       )
    }
 }

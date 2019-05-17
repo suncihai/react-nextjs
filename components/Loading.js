@@ -9,7 +9,7 @@ const LoadingWrap= styled.div`
    text-align: center;
 `
 const { Spin, Icon } = antd
-const antIcon = <Icon type="loading" style={{fontSize: 24, color: '#1890ff'}} dpin/>
+const antIcon = <Icon type="loading" style={{fontSize: 24, color: '#1890ff'}}/>
 
 const Loading = () => (
   <>

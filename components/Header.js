@@ -16,6 +16,9 @@ const Navi = styled.li`
    margin: 0 15px;
    display: inline-block;
    cursor: pointer;
+   &:hover {
+     opacity: 0.7;
+   }
 `
 
 const Logo = styled.img`

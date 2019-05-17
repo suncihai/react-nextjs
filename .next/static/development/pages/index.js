@@ -389,7 +389,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n   margin: 0 15px;\n   display: inline-block;\n   cursor: pointer;\n"]);
+  var data = _taggedTemplateLiteral(["\n   margin: 0 15px;\n   display: inline-block;\n   cursor: pointer;\n   &:hover {\n     opacity: 0.7;\n   }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -439,6 +439,31 @@ var Header = function Header() {
 
 /***/ }),
 
+/***/ "./components/Layout.js":
+/*!******************************!*\
+  !*** ./components/Layout.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./components/Header.js");
+/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer */ "./components/Footer.js");
+
+
+
+
+var Layout = function Layout(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Layout);
+
+/***/ }),
+
 /***/ "./components/Loading.js":
 /*!*******************************!*\
   !*** ./components/Loading.js ***!
@@ -480,8 +505,7 @@ var antIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Icon, {
   style: {
     fontSize: 24,
     color: '#1890ff'
-  },
-  dpin: true
+  }
 });
 
 var Loading = function Loading() {
@@ -28203,20 +28227,13 @@ module.exports = warning;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-jsx/style */ "./node_modules/styled-jsx/style.js");
-/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
-/* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Footer */ "./components/Footer.js");
-/* harmony import */ var _components_Partners__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Partners */ "./components/Partners.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../assets/img/partners_bg.jpg */ "./assets/img/partners_bg.jpg");
-/* harmony import */ var _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_7__);
-
-
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.js");
+/* harmony import */ var _components_Partners__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Partners */ "./components/Partners.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/img/partners_bg.jpg */ "./assets/img/partners_bg.jpg");
+/* harmony import */ var _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28262,10 +28279,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-
-
-var Body = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject());
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject2(), _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_7___default.a);
+var Body = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject());
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject2(), _assets_img_partners_bg_jpg__WEBPACK_IMPORTED_MODULE_4___default.a);
 
 var Index =
 /*#__PURE__*/
@@ -28281,27 +28296,19 @@ function (_React$Component) {
   _createClass(Index, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Body, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default.a, {
-        styleId: "843129182",
-        css: "body,html,h1,h2,h3,h4,h5,p{margin:0;padding:0;}ul{list-style:none;margin:0;padding:0;}a{-webkit-text-decoration:none;text-decoration:none;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jaWhhaXN1bi9EZXNrdG9wL1JlYWN0L3JlYWN0LW5leHRqcy9wYWdlcy9pbmRleC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFvRDZCLEFBR3dCLEFBSU8sQUFLSyxTQVJYLE9BSUQsR0FIWCxNQUlZLFVBQ1osZUFHQSIsImZpbGUiOiIvVXNlcnMvY2loYWlzdW4vRGVza3RvcC9SZWFjdC9yZWFjdC1uZXh0anMvcGFnZXMvaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnXG5pbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnXG5pbXBvcnQgSGVhZGVyIGZyb20gJy4uL2NvbXBvbmVudHMvSGVhZGVyJ1xuaW1wb3J0IEZvb3RlciBmcm9tICcuLi9jb21wb25lbnRzL0Zvb3RlcidcbmltcG9ydCBQYXJ0bmVycyBmcm9tICcuLi9jb21wb25lbnRzL1BhcnRuZXJzJ1xuaW1wb3J0IHN0eWxlZCBmcm9tICdzdHlsZWQtY29tcG9uZW50cydcbmltcG9ydCBiYW5uZXJJbWcgZnJvbSAnLi4vYXNzZXRzL2ltZy9wYXJ0bmVyc19iZy5qcGcnXG5cbmNvbnN0IEJvZHkgPSBzdHlsZWQuZGl2YFxuICAgYmFja2dyb3VuZDogI2ViZWVmMDtcbmBcblxuY29uc3QgQ29udGFpbmVyID0gc3R5bGVkLmRpdmBcbiAgICBoZWlnaHQ6IDYwMHB4O1xuICAgIGJhY2tncm91bmQ6dXJsKCR7YmFubmVySW1nfSkgbm8tcmVwZWF0IDEwMCUgMTAwJTtcbiAgICBiYWNrZ3JvdW5kLXNpemU6IDE5MjBweDtcbiAgICAudGl0bGUge1xuICAgICAgICBwYWRkaW5nLXRvcDogMTgwcHg7XG4gICAgICAgIHdpZHRoOiAxMDAwcHg7XG4gICAgICAgIG1hcmdpbjogMCBhdXRvO1xuICAgICAgICBoMyB7XG4gICAgICAgICAgZm9udC1mYW1pbHk6IERJTkJvbGQ7XG4gICAgICAgICAgZm9udC1zaXplOiA0NHB4O1xuICAgICAgICAgIGxldHRlci1zcGFjaW5nOiAxMXB4O1xuICAgICAgICAgIG1hcmdpbi1ib3R0b206IDMwcHg7XG4gICAgICAgICAgdGV4dC1hbGlnbjogbGVmdDtcbiAgICAgICAgICBjb2xvcjogI2ZmZjtcbiAgICAgICAgfVxuICAgICAgICBwIHtcbiAgICAgICAgICBjb2xvcjogI2E0YTlhYztcbiAgICAgICAgICBsaW5lLWhlaWdodDogMjJweDtcbiAgICAgICAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICAgICAgICB3aWR0aDogNjAwcHg7XG4gICAgICAgIH1cbiAgICAgICAgYSB7XG4gICAgICAgICAgYm9yZGVyOiAxcHggc29saWQgIzA4YWJhNjtcbiAgICAgICAgICBjb2xvcjogIzA4YWJhNjtcbiAgICAgICAgICBoZWlnaHQ6IDQ4cHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICAgIGxpbmUtaGVpZ2h0OiA0OHB4O1xuICAgICAgICAgIHBhZGRpbmc6IDE0cHggNThweDtcbiAgICAgICAgICBib3JkZXItcmFkaXVzOiAzMnB4O1xuICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgfVxuICAgIH1cbmBcblxuY2xhc3MgSW5kZXggZXh0ZW5kcyBSZWFjdC5Db21wb25lbnQge1xuICAgcmVuZGVyKCl7XG4gICAgICByZXR1cm4gKFxuICAgICAgICA8Qm9keT5cbiAgICAgICAgICA8c3R5bGUganN4IGdsb2JhbD57YFxuICAgICAgICAgICAgYm9keSxodG1sLGgxLGgyLGgzLGg0LGg1LHB7XG4gICAgICAgICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIHVsIHtcbiAgICAgICAgICAgICAgbGlzdC1zdHlsZTogbm9uZTtcbiAgICAgICAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgYSB7XG4gICAgICAgICAgICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICBgfTwvc3R5bGU+XG4gICAgICAgICAgPEhlYWRlciAvPlxuICAgICAgICAgIDxDb250YWluZXIgY2xhc3NOYW1lPVwiYmFubmVyLWNvbnRhaW5lclwiPlxuICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGl0bGVcIj5cbiAgICAgICAgICAgICAgICA8aDM+T3VyIFBhcnRuZXJzPC9oMz5cbiAgICAgICAgICAgICAgICA8cD5CaXRNYXJ0IGFpbSB0byBwaW9uZWVyIHRoZSB3b3JsZCB0byBhIGJldHRlciBmaW5hbmNpYWwgc3lzdGVtIHdpdGggZmFpcm5lc3MgYW5kIGVxdWFsaXR5LiBTaW5jZSAyMDE3LCBncm93aW5nIHBhcnRuZXJzIGFyZSBqb2luaW5nIGFuZCB0aWdodGx5IHdvcmtpbmcgd2l0aCBCaXRNYXJ0IGZvciB0aGUgcmVtYXJrYWJsZSBodW1hbiByZXZvbHV0aW9uLiBXZSBiZWxpZXZlLCBtb3JlIGVmZmljaWVuY3ksIG1vcmUgZmFpcm5lc3MgY2FuIGZ1bmRhbWVudGFsbHkgYWNjZWxlcmF0ZSB0aGUgd29yZCB0byBhIGJldHRlciBwbGFjZS48L3A+XG4gICAgICAgICAgICAgICAgPGEgaHJlZj1cImh0dHBzOi8vd3d3LndyaWtlLmNvbS9mcm9udGVuZC9yZXF1ZXN0Zm9ybXMvaW5kZXguaHRtbD90b2tlbj1leUpoWTJOdmRXNTBTV1FpT2pFNU1UQXpOVGdzSW5SaGMydEdiM0p0U1dRaU9qRTVPVEExTjMwSk5EY3dOakF4T1RNNE9EUXhNUWsxTkdNMk5XSTFNREE0TVRjMVlqRXdNREF3WVdRME16QTRaV0l4WTJFNU1UQmxOREZtTWpnMFlXTmpaamMwWm1ZM1l6RmhaV05oT0RjNFpXTm1ZalZsXCIgdGFyZ2V0PVwiX2JsYW5rXCI+QmUgT3VyIFBhcnRuZXI8L2E+XG4gICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9Db250YWluZXI+XG4gICAgICAgICAgPFBhcnRuZXJzIC8+XG4gICAgICAgICAgPEZvb3RlciAvPlxuICAgICAgICA8L0JvZHk+XG4gICAgICApXG4gICB9XG59XG5cbmV4cG9ydCBkZWZhdWx0IEluZGV4XG4iXX0= */\n/*@ sourceURL=/Users/cihaisun/Desktop/React/react-nextjs/pages/index.js */"
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Container, {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
         className: "banner-container"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "jsx-843129182" + " " + "title"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-        className: "jsx-843129182"
-      }, "Our Partners"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "jsx-843129182"
-      }, "BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Our Partners"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "https://www.wrike.com/frontend/requestforms/index.html?token=eyJhY2NvdW50SWQiOjE5MTAzNTgsInRhc2tGb3JtSWQiOjE5OTA1N30JNDcwNjAxOTM4ODQxMQk1NGM2NWI1MDA4MTc1YjEwMDAwYWQ0MzA4ZWIxY2E5MTBlNDFmMjg0YWNjZjc0ZmY3YzFhZWNhODc4ZWNmYjVl",
-        target: "_blank",
-        className: "jsx-843129182"
-      }, "Be Our Partner"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Partners__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+        target: "_blank"
+      }, "Be Our Partner"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Partners__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     }
   }]);
 
   return Index;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
     (function (Component, route) {
