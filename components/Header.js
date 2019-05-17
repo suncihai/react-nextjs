@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import LogoImg from '../assets/img/logo.png'
+import cx from 'classname'
 
 const Bar = styled.div`
    background: transparent;
@@ -10,6 +11,11 @@ const Bar = styled.div`
    height: 50px;
    padding-top: 8px;
    padding-left: 10px;
+   width: 100%;
+   transition: ease 0.5s;
+   &.isDark {
+      background: #0e1118;
+   }
 `
 
 const Navi = styled.li`
@@ -29,25 +35,32 @@ const Logo = styled.img`
 
 const naviList = ['Exchange','News','App','About','Labs']
 
-const Header = () => (
-  <div>
-    <Bar>
-       <Logo src={LogoImg} />
-       <ul style={{display:'inline-block',marginLeft: '30px'}}>
-       {
-          naviList.map((ele, index)=>{
-            return (
-               <Navi key={index}>
-                  <Link href={`/${ele.toLowerCase()}`}>
-                    <span>{ele}</span>
-                 </Link>
-               </Navi>
-            )
-          })
-       }
-       </ul>
-    </Bar>
-  </div>
-)
+const Header = (props) => {
+
+  const bgClass = cx({
+     'isDark': props.isDark
+  })
+
+  return (
+   <div>
+      <Bar className={bgClass}>
+         <Logo src={LogoImg} />
+         <ul style={{display:'inline-block',marginLeft: '30px'}}>
+         {
+            naviList.map((ele, index)=>{
+               return (
+                  <Navi key={index}>
+                     <Link href={`/${ele.toLowerCase()}`}>
+                     <span>{ele}</span>
+                  </Link>
+                  </Navi>
+               )
+            })
+         }
+         </ul>
+      </Bar>
+   </div>
+  )
+}
 
 export default Header;

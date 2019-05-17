@@ -45,9 +45,27 @@ const Container = styled.div`
 `
 
 class Index extends React.Component {
+  state = {
+    isDark : false,
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = () => {
+    if (window.scrollY > 250) {
+       this.setState({isDark: true})
+    } else {
+       this.setState({isDark: false})
+    }
+  }
+
    render(){
+      const { isDark } = this.state
+ 
       return (
-        <Layout>
+        <Layout isDark={isDark}>
           <Body>
             <Container className="banner-container">
               <div className="title">

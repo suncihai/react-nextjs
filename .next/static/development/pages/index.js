@@ -376,6 +376,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/img/logo.png */ "./assets/img/logo.png");
 /* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_img_logo_png__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classname */ "./node_modules/classname/classname.js");
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classname__WEBPACK_IMPORTED_MODULE_4__);
 
 
 function _templateObject3() {
@@ -399,7 +401,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n   background: transparent;\n   position: fixed;\n   top: 0;\n   color: #fff;\n   height: 50px;\n   padding-top: 8px;\n   padding-left: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n   background: transparent;\n   position: fixed;\n   top: 0;\n   color: #fff;\n   height: 50px;\n   padding-top: 8px;\n   padding-left: 10px;\n   width: 100%;\n   transition: ease 0.5s;\n   &.isDark {\n      background: #0e1118;\n   }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -413,13 +415,19 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
+
 var Bar = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
 var Navi = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].li(_templateObject2());
 var Logo = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject3());
 var naviList = ['Exchange', 'News', 'App', 'About', 'Labs'];
 
-var Header = function Header() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Bar, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
+var Header = function Header(props) {
+  var bgClass = classname__WEBPACK_IMPORTED_MODULE_4___default()({
+    'isDark': props.isDark
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Bar, {
+    className: bgClass
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
     src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_3___default.a
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     style: {
@@ -457,7 +465,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Layout = function Layout(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    isDark: props.isDark
+  }), props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Layout);
@@ -9488,6 +9498,140 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 } : function (obj) {
   return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
 };
+
+/***/ }),
+
+/***/ "./node_modules/classname/classname.js":
+/*!*********************************************!*\
+  !*** ./node_modules/classname/classname.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function classname () {
+    var result = {},
+        objects = {},
+        resultString = "";
+
+    function add (strings) {
+        classname.each(strings.split(" "), function (string) {
+            result[string] = !!string;
+        });
+    }
+
+    classname.each([].slice.call(arguments), function (x) {
+        switch (classname.getType(x)) {
+        case "string":
+        case "number":
+            add(x);
+            break;
+
+        case "array":
+            add(classname.apply(null, x));
+            break;
+
+        case "element":
+            add(classname(x.className || ""));
+            break;
+
+        case "nodelist":
+            add(classname.apply(null, [].slice.call(x)));
+            break;
+
+        case "jquery":
+            add(classname.apply(null, x.get()));
+            break;
+
+        case "object":
+            objects = classname.extend(objects, x);
+            break;
+        }
+    });
+
+    result = classname.extend(result, objects);
+
+    classname.each(result, function (val, key) {
+        if (val) {
+            resultString += " " + key;
+        }
+    });
+
+    return resultString.substr(1);
+}
+
+classname.setTo = function (elements) {
+    var type = classname.getType(elements);
+
+    if (type === "element") {
+        elements = [elements];
+    }
+
+    if (type === "jquery") {
+        elements = elements.get();
+    }
+
+    if (type === "nodelist") {
+        elements = [].slice.call(elements);
+    }
+
+    return function () {
+        var classNames = classname.apply(null, arguments);
+
+        classname.each(elements, function (element) {
+            element.className = classNames;
+        });
+    };
+};
+
+classname.each = function (arr, fn) {
+    var type = classname.getType(arr);
+
+    if (type === "array") {
+        for (var i = 0; i < arr.length; i++) {
+            fn(arr[i], i);
+        }
+    }
+
+    if (type === "object") {
+        for (var key in arr) {
+            fn(arr[key], key);
+        }
+    }
+};
+
+classname.getType = function (x) {
+    var type = Object.prototype.toString.call(x).slice(8, -1).toLowerCase();
+
+    if (type === "object" && x.jquery) {
+        return "jquery";
+    }
+
+    if (type.indexOf("element") > 1) {
+        return "element";
+    }
+
+    return type;
+};
+
+classname.extend = function (obj1, obj2) {
+    var result = {},
+        objs = [obj1, obj2];
+
+    classname.each(objs, function (obj) {
+        classname.each(obj, function (val, key) {
+            if (obj.hasOwnProperty(key)) {
+                result[key] = val;
+            }
+        });
+    });
+
+    return result;
+};
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = classname;
+}
+
 
 /***/ }),
 
@@ -28244,13 +28388,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    height: 600px;\n    background:url(", ") no-repeat 100% 100%;\n    background-size: 1920px;\n    .title {\n        padding-top: 180px;\n        width: 1000px;\n        margin: 0 auto;\n        h3 {\n          font-family: DINBold;\n          font-size: 44px;\n          letter-spacing: 11px;\n          margin-bottom: 30px;\n          text-align: left;\n          color: #fff;\n        }\n        p {\n          color: #a4a9ac;\n          line-height: 22px;\n          margin-bottom: 30px;\n          font-size: 12px;\n          width: 600px;\n        }\n        a {\n          border: 1px solid #08aba6;\n          color: #08aba6;\n          height: 48px;\n          font-size: 14px;\n          line-height: 48px;\n          padding: 14px 58px;\n          border-radius: 32px;\n          text-align: center;\n        }\n    }\n"]);
@@ -28288,15 +28434,49 @@ function (_React$Component) {
   _inherits(Index, _React$Component);
 
   function Index() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Index).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Index)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      isDark: false
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onScroll", function () {
+      if (window.scrollY > 250) {
+        _this.setState({
+          isDark: true
+        });
+      } else {
+        _this.setState({
+          isDark: false
+        });
+      }
+    });
+
+    return _this;
   }
 
   _createClass(Index, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.addEventListener('scroll', this.onScroll);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+      var isDark = this.state.isDark;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        isDark: isDark
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
         className: "banner-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title"
