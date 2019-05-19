@@ -33,7 +33,7 @@ const Logo = styled.img`
    vertical-align: middle;
 `
 
-const naviList = ['Exchange','News','App','About','Labs']
+const naviList = ['Exchange','News','App','About','Labs','Homepage']
 
 const Header = (props) => {
 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { startClock, serverRenderClock, getPartners } from '../store'
 import Examples from '../components/example'
 import { websocketSub } from '../common/js/rx-websocket'
+import { CoinList } from '../common/js/const'
 
 const PartnerContainer = styled.div`
    width: 1000px;
@@ -31,15 +32,30 @@ class Partners extends React.Component {
       this.getPartners()
       this.timer = setInterval(() => this.props.startClock(), 1000)
 
-      const subItems = websocketSub.getSubItems()
       const accSubject = websocketSub.createSubject({
         subscribe: 'according',
         local: 'en_US',
       })
+
+      this.getWebSocket()
    }
 
    componentWillUnmount () {
       clearInterval(this.timer)
+    }
+
+    getWebSocket() {
+      const subscribeSymbol = (symbolId) => {
+         websocketSub.createSubject({
+           subscribe: 'price',
+           symbol: symbolId,
+           local: 'en_US',
+         })
+       }
+   
+       CoinList.forEach((coinInfo) => {
+           subscribeSymbol(coinInfo)
+       })
     }
 
    getPartners = async () => {
