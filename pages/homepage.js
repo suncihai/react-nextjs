@@ -7,6 +7,9 @@ import banner2 from '../assets/img/banner2.jpg'
 import banner3 from '../assets/img/banner3.png'
 import banner4 from '../assets/img/banner4.png'
 import banner5 from '../assets/img/banner5.jpg'
+import CoinList from '../components/CoinList'
+import Head from 'next/head'
+
 
 import { Carousel } from 'antd';
 
@@ -56,6 +59,14 @@ class Home extends React.Component {
     window.addEventListener('scroll', this.onScroll)
   }
 
+  onScroll = () => {
+    if (window.scrollY > 250) {
+       this.setState({isDark: true})
+    } else {
+       this.setState({isDark: false})
+    }
+  }
+
    render(){
       const { isDark } = this.state
 
@@ -68,6 +79,9 @@ class Home extends React.Component {
  
       return (
         <Layout isDark={isDark}>
+          <Head>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
+          </Head>
           <Body>
             <Container>
                <Carousel autoplay {...CarouselSettings}>
@@ -85,6 +99,7 @@ class Home extends React.Component {
                  </div>
                </Carousel>
             </Container>
+            <CoinList />
           </Body>
         </Layout>
       )

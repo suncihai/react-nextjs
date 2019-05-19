@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  body,html,h1,h2,h3,h4,h5,p{\n    margin: 0;\n    padding: 0;\n  }\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n  }\n  a {\n    text-decoration: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  body,html,h1,h2,h3,h4,h5,p{\n    margin: 0;\n    padding: 0;\n  }\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n  }\n  a {\n    text-decoration: none;\n  }\n  .tickGreen {\n    -webkit-animation: GREEN-FADE 1s ;\n    -moz-animation:    GREEN-FADE 1s ;\n    -o-animation:      GREEN-FADE 1s ;\n    animation:         GREEN-FADE 1s ;\n  }\n  .tickRed {\n    -webkit-animation: RED-FADE 1s ;\n    -moz-animation:    RED-FADE 1s ;\n    -o-animation:      RED-FADE 1s ;\n    animation:         RED-FADE 1s ;\n  }\n  @-webkit-keyframes GREEN-FADE {\n    0%   { background-color: #8bc34a; }\n    100% { background-color: transparent; }\n  }\n  @-moz-keyframes GREEN-FADE {\n    0%   { background-color: #8bc34a; }\n    100% { background-color: transparent; }\n  }\n  @-o-keyframes GREEN-FADE {\n    0%   { background-color: #8bc34a; }\n    100% { background-color: transparent; }\n  }\n  @keyframes GREEN-FADE {\n    0%   { background-color: #8bc34a; }\n    100% { background-color: transparent; }\n  }\n  @-webkit-keyframes RED-FADE {\n    0%   { background-color: #f44336; }\n    100% { background-color: transparent; }\n  }\n  @-moz-keyframes RED-FADE {\n    0%   { background-color: #f44336; }\n    100% { background-color: transparent; }\n  }\n  @-o-keyframes RED-FADE {\n    0%   { background-color: #f44336; }\n    100% { background-color: transparent; }\n  }\n  @keyframes RED-FADE {\n    0%   { background-color: #f44336; }\n    100% { background-color: transparent; }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -343,7 +343,7 @@ function (_App) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -356,6 +356,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decrementCount", function() { return decrementCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetCount", function() { return resetCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPartners", function() { return getPartners; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCoinPrice", function() { return getCoinPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
@@ -367,14 +368,16 @@ var InitialState = {
   lastUpdate: 0,
   light: false,
   count: 0,
-  partners: {}
+  partners: {},
+  coins: {}
 };
 var actionTypes = {
   TICK: 'TICK',
   INCREMENT: 'INCREMENT',
   DECREMENT: 'DECREMENT',
   RESET: 'RESET',
-  GETPARTNERS: 'GETPARTNERS' // REDUCERS
+  GETPARTNERS: 'GETPARTNERS',
+  GETCOINPRICE: 'GETCOINPRICE' // REDUCERS
 
 };
 var reducer = function reducer() {
@@ -406,6 +409,11 @@ var reducer = function reducer() {
     case actionTypes.GETPARTNERS:
       return Object.assign({}, state, {
         partners: action.payload
+      });
+
+    case actionTypes.GETCOINPRICE:
+      return Object.assign({}, state, {
+        coins: action.payload
       });
 
     default:
@@ -445,6 +453,12 @@ var resetCount = function resetCount() {
 var getPartners = function getPartners(data) {
   return {
     type: actionTypes.GETPARTNERS,
+    payload: data
+  };
+};
+var getCoinPrice = function getCoinPrice(data) {
+  return {
+    type: actionTypes.GETCOINPRICE,
     payload: data
   };
 };

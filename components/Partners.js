@@ -31,12 +31,6 @@ class Partners extends React.Component {
    componentDidMount() {
       this.getPartners()
       this.timer = setInterval(() => this.props.startClock(), 1000)
-
-      const accSubject = websocketSub.createSubject({
-        subscribe: 'according',
-        local: 'en_US',
-      })
-
       this.getWebSocket()
    }
 
@@ -45,16 +39,9 @@ class Partners extends React.Component {
     }
 
     getWebSocket() {
-      const subscribeSymbol = (symbolId) => {
-         websocketSub.createSubject({
-           subscribe: 'price',
-           symbol: symbolId,
-           local: 'en_US',
-         })
-       }
-   
-       CoinList.forEach((coinInfo) => {
-           subscribeSymbol(coinInfo)
+      const accSubject = websocketSub.createSubject({
+         subscribe: 'according',
+         local: 'en_US',
        })
     }
 

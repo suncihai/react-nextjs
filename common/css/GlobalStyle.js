@@ -13,4 +13,48 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+  .tickGreen {
+    -webkit-animation: GREEN-FADE 1s ;
+    -moz-animation:    GREEN-FADE 1s ;
+    -o-animation:      GREEN-FADE 1s ;
+    animation:         GREEN-FADE 1s ;
+  }
+  .tickRed {
+    -webkit-animation: RED-FADE 1s ;
+    -moz-animation:    RED-FADE 1s ;
+    -o-animation:      RED-FADE 1s ;
+    animation:         RED-FADE 1s ;
+  }
+  @-webkit-keyframes GREEN-FADE {
+    0%   { background-color: #8bc34a; }
+    100% { background-color: transparent; }
+  }
+  @-moz-keyframes GREEN-FADE {
+    0%   { background-color: #8bc34a; }
+    100% { background-color: transparent; }
+  }
+  @-o-keyframes GREEN-FADE {
+    0%   { background-color: #8bc34a; }
+    100% { background-color: transparent; }
+  }
+  @keyframes GREEN-FADE {
+    0%   { background-color: #8bc34a; }
+    100% { background-color: transparent; }
+  }
+  @-webkit-keyframes RED-FADE {
+    0%   { background-color: #f44336; }
+    100% { background-color: transparent; }
+  }
+  @-moz-keyframes RED-FADE {
+    0%   { background-color: #f44336; }
+    100% { background-color: transparent; }
+  }
+  @-o-keyframes RED-FADE {
+    0%   { background-color: #f44336; }
+    100% { background-color: transparent; }
+  }
+  @keyframes RED-FADE {
+    0%   { background-color: #f44336; }
+    100% { background-color: transparent; }
+  }
 `

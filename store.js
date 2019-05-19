@@ -6,6 +6,7 @@ const InitialState = {
   light: false,
   count: 0,
   partners: {},
+  coins: {},
 }
 
 export const actionTypes = {
@@ -13,7 +14,8 @@ export const actionTypes = {
   INCREMENT: 'INCREMENT',
   DECREMENT: 'DECREMENT',
   RESET: 'RESET',
-  GETPARTNERS: 'GETPARTNERS'
+  GETPARTNERS: 'GETPARTNERS',
+  GETCOINPRICE: 'GETCOINPRICE',
 }
 
 // REDUCERS
@@ -39,6 +41,10 @@ export const reducer = (state = InitialState, action) => {
     case actionTypes.GETPARTNERS:
       return Object.assign({}, state, {
         partners: action.payload
+      })
+    case actionTypes.GETCOINPRICE:
+      return Object.assign({}, state, {
+        coins: action.payload
       })
     default:
       return state
@@ -67,6 +73,10 @@ export const resetCount = () => {
 
 export const getPartners = (data) => {
   return { type: actionTypes.GETPARTNERS, payload: data }
+}
+
+export const getCoinPrice = (data) => {
+  return { type: actionTypes.GETCOINPRICE, payload: data }
 }
 
 export function initializeStore (initialState = InitialState) {
