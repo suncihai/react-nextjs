@@ -1,46 +1,52 @@
 import React from 'react'
 import Layout from '../components/Layout'
-import Partners from '../components/Partners'
 import styled from 'styled-components'
-import bannerImg from '../assets/img/partners_bg.jpg'
+import bannerBg from '../assets/img/home_bg.jpg'
+import banner1 from '../assets/img/banner1.jpg'
+import banner2 from '../assets/img/banner2.jpg'
+import banner3 from '../assets/img/banner3.png'
+import banner4 from '../assets/img/banner4.png'
+import banner5 from '../assets/img/banner5.jpg'
+import CoinList from '../components/CoinList'
+import Head from 'next/head'
+
+
+import { Carousel } from 'antd';
 
 const Body = styled.div`
    background: #ebeef0;
 `
 
 const Container = styled.div`
-    height: 600px;
-    background:url(${bannerImg}) no-repeat 100% 100%;
+    height: 500px;
+    background:url(${bannerBg}) no-repeat 100% 100%;
     background-size: 1920px;
     .title {
         padding-top: 180px;
         width: 1000px;
         margin: 0 auto;
-        h3 {
-          font-family: DINBold;
-          font-size: 44px;
-          letter-spacing: 11px;
-          margin-bottom: 30px;
-          text-align: left;
-          color: #fff;
-        }
-        p {
-          color: #a4a9ac;
-          line-height: 22px;
-          margin-bottom: 30px;
-          font-size: 12px;
-          width: 600px;
-        }
-        a {
-          border: 1px solid #08aba6;
-          color: #08aba6;
-          height: 48px;
-          font-size: 14px;
-          line-height: 48px;
-          padding: 14px 58px;
-          border-radius: 32px;
-          text-align: center;
-        }
+
+    }
+    img {
+      width: 290px;
+      margin: 5px;
+    }
+    .ant-carousel {
+       padding-top: 180px;
+       .slick-slider {
+          height: 300px;
+          width: 1200px;
+          margin: 0 auto;
+       }
+       .slick-slide {
+         img {
+            display: inline-block;
+         }
+       }
+       h2 {
+         font-size: 30px;
+         color: #fff;
+       }
     }
 `
 
@@ -63,18 +69,39 @@ class Index extends React.Component {
 
    render(){
       const { isDark } = this.state
+
+      const CarouselSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        autoplaySpeed: 3000,
+      }
  
       return (
         <Layout isDark={isDark}>
+          <Head>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
+            <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+            <script src="/static/liquidFillGauge.js" language="JavaScript"></script>
+          </Head>
           <Body>
-            <Container className="banner-container">
-              <div className="title">
-                  <h3>Our Partners</h3>
-                  <p>BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place.</p>
-                  <a href="https://www.wrike.com/frontend/requestforms/index.html?token=eyJhY2NvdW50SWQiOjE5MTAzNTgsInRhc2tGb3JtSWQiOjE5OTA1N30JNDcwNjAxOTM4ODQxMQk1NGM2NWI1MDA4MTc1YjEwMDAwYWQ0MzA4ZWIxY2E5MTBlNDFmMjg0YWNjZjc0ZmY3YzFhZWNhODc4ZWNmYjVl" target="_blank">Be Our Partner</a>
-              </div>
+            <Container>
+               <Carousel autoplay {...CarouselSettings}>
+                 <div>
+                    <h2>A Premier Global Digital Asset Trading Platform</h2>
+                 </div>
+                 <div>
+                    <img src={banner1} />
+                    <img src={banner2} />
+                    <img src={banner3} />
+                    <img src={banner4} />
+                 </div>
+                 <div>
+                    <img src={banner5} />
+                 </div>
+               </Carousel>
             </Container>
-            <Partners />
+            <CoinList />
           </Body>
         </Layout>
       )
@@ -82,3 +109,6 @@ class Index extends React.Component {
 }
 
 export default Index
+
+
+

@@ -15,6 +15,10 @@ const CoinListContainer = styled.div`
    padding-bottom: 100px;
 `
 
+const CoinGraphContainer = styled.div`
+   margin-bottom: 30px;
+`
+
 const CoinWrap = styled.div`
    display: inline-block;
    padding: 12.5px 0;
@@ -25,15 +29,79 @@ const CoinWrap = styled.div`
 `
 class CoinList extends React.Component {
    state = {
-      status: true  //To trigger rerendering page
+      status: true,  //To trigger rerendering page
+      socket: {},
    }
 
-   componentDidMount() {
-      this.getCoinList();
+   componentDidMount() {      
+      let gauge = []
+      //var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+      var config1 = liquidFillGaugeDefaultSettings();
+      config1.waveAnimateTime = 5000;
+      config1.waveHeight = 0.08;
+      config1.waveOffset = 0.25;
+      config1.valueCountUp = false;
+      config1.displayPercent = false;
+      config1.textSize = 0.75;
+      config1.minValue = 7500;
+      config1.maxValue = 8500;
+      gauge[0] = loadLiquidFillGauge("fillgauge1", 0, config1);
+      var config2 = liquidFillGaugeDefaultSettings();
+      config2.waveAnimateTime = 5000;
+      config2.waveHeight = 0.08;
+      config2.waveOffset = 0.25;
+      config2.valueCountUp = false;
+      config2.displayPercent = false;
+      config2.textSize = 0.75;
+      config2.minValue = 100;
+      config2.maxValue = 500;
+      gauge[1] = loadLiquidFillGauge("fillgauge2", 0, config2);
+      var config3 = liquidFillGaugeDefaultSettings();
+      config3.waveAnimateTime = 5000;
+      config3.waveHeight = 0.08;
+      config3.waveOffset = 0.25;
+      config3.valueCountUp = false;
+      config3.displayPercent = false;
+      config3.textSize = 0.75;
+      config3.minValue = 0;
+      config3.maxValue = 20;
+      gauge[2] = loadLiquidFillGauge("fillgauge3", 0, config3);
+      var config4 = liquidFillGaugeDefaultSettings();
+      config4.waveAnimateTime = 5000;
+      config4.waveHeight = 0.08;
+      config4.waveOffset = 0.25;
+      config4.valueCountUp = false;
+      config4.displayPercent = false;
+      config4.textSize = 0.75;
+      config4.minValue = 50;
+      config4.maxValue = 200;
+      gauge[3] = loadLiquidFillGauge("fillgauge4", 0, config4);
+      var config5 = liquidFillGaugeDefaultSettings();
+      config5.waveAnimateTime = 5000;
+      config5.waveHeight = 0.08;
+      config5.waveOffset = 0.25;
+      config5.valueCountUp = false;
+      config5.displayPercent = false;
+      config5.textSize = 0.75;
+      config5.minValue = 200;
+      config5.maxValue = 600;
+      gauge[4] = loadLiquidFillGauge("fillgauge5", 0, config5);
+
+      this.getCoinList(gauge);
     }
+
+   updageGauge() {
+      
+   }
+
+   componentWillUnmount() {
+      if(this.socket) {
+         this.socket.close()
+         this.socket.disconnect()
+      }
+   }
   
-    getCoinList = async () => {
-  
+    getCoinList = async (gauge) => {
       const ret = await axios.get(`${cryptoApiUrl}/data/top/totalvolfull?limit=100&tsym=USD`)
       const coins = ret.data.Data
   
@@ -48,28 +116,28 @@ class CoinList extends React.Component {
       })
   
       this.props.getCoinPrice(coinsParsed)
-      this.subscribeStream(Object.keys(coinsParsed), coinsParsed)
+      this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge)
     }
   
-    subscribeStream(symbols, coins) {
+    subscribeStream(symbols, coins, gauge) {
       /*
         Subscribe to websocket stream using coin symbols.
       */
-      let cryptoio = io.connect(cryptoStreamUrl)
+      this.socket = io.connect(cryptoStreamUrl)
       let subscriptions = []
   
       symbols.forEach(symbol => {
         subscriptions.push('5~CCCAGG~'+ symbol +'~USD')
       })
   
-      cryptoio.emit('SubAdd', {'subs': subscriptions})
+      this.socket.emit('SubAdd', {'subs': subscriptions})
   
-      cryptoio.on('m', message => {
-        this.handleMessage(message, coins)
+      this.socket.on('m', message => {
+        this.handleMessage(message, coins, gauge)
       })
     }
   
-    handleMessage(message, coins) {
+    handleMessage(message, coins, gauge) {
       //console.log('coins', this.props.coins)
   
       message = message.split('~')
@@ -91,15 +159,29 @@ class CoinList extends React.Component {
           coin.isDown = true
         }
   
-        this.updateCoin(coin, coins)
+        this.updateCoin(coin, coins, gauge)
       }
     }
   
-    updateCoin(coin, coins) {
+    updateCoin(coin, coins, gauge) {
       const { status } = this.state
       this.setState({status:!status})
       coins[coin.name] = coin
       this.props.getCoinPrice(coins)
+      
+      Object.values(coins).map((ele, index)=>{
+         if(ele.name=="BTC"){
+            gauge[0].update(parseFloat(ele.price))
+         }else if(ele.name=="ETH"){
+            gauge[1].update(parseFloat(ele.price))
+         }else if(ele.name=="EOS"){
+            gauge[2].update(parseFloat(ele.price))
+         }else if(ele.name=="LTC"){
+            gauge[3].update(parseFloat(ele.price))
+         }else if(ele.name=="BCH"){
+            gauge[4].update(parseFloat(ele.price))
+         }
+      })
       /*
         Reset coin status after short interval to remove binded css classes.
         This will allow tick animations be reapplied and play again.
@@ -122,6 +204,14 @@ class CoinList extends React.Component {
          return (
            <>
             <CoinListContainer>
+               <CoinGraphContainer>
+                  {/* <svg id="fillgauge1" width="97%" height="250"></svg> */}
+                  <svg id="fillgauge1" width="19%" height="200"></svg>
+                  <svg id="fillgauge2" width="19%" height="200"></svg>
+                  <svg id="fillgauge3" width="19%" height="200"></svg>
+                  <svg id="fillgauge4" width="19%" height="200"></svg>
+                  <svg id="fillgauge5" width="19%" height="200"></svg>
+               </CoinGraphContainer>
                { Object.values(this.props.coins).map(ele =>
                   <CoinWrap key={ele.name} className={cx({'tickGreen':ele.isUp,'tickRed':ele.isDown})}>
                      <div>{ele.name}</div>

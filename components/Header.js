@@ -31,9 +31,10 @@ const Logo = styled.img`
    display: inline-block;
    height: 35px;
    vertical-align: middle;
+   cursor: pointer;
 `
 
-const naviList = ['Exchange','News','App','About','Labs','Homepage']
+const naviList = ['Exchange','News','App','About','Labs','Partners']
 
 const Header = (props) => {
 
@@ -44,7 +45,9 @@ const Header = (props) => {
   return (
    <div>
       <Bar className={bgClass}>
-         <Logo src={LogoImg} />
+         <Link href={`/`}>
+            <Logo src={LogoImg} />
+         </Link>
          <ul style={{display:'inline-block',marginLeft: '30px'}}>
          {
             naviList.map((ele, index)=>{

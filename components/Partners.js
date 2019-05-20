@@ -35,6 +35,16 @@ class Partners extends React.Component {
    }
 
    componentWillUnmount () {
+      const subItems = websocketSub.getSubItems()
+      subItems.forEach((subObj, index) => {
+         if(subObj.subscribe === 'according') {
+           websocketSub.createSubject({
+             subscribe: 'according_cancel',
+             local: subObj.subscribeObj.local,
+           })
+           subItems.splice(index, 1)
+         }
+       })
       clearInterval(this.timer)
     }
 

@@ -1,4 +1,4 @@
-((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/homepage.js"],{
+((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
 
 /***/ "./assets/img/banner1.jpg":
 /*!********************************!*\
@@ -457,9 +457,13 @@ var CoinListContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"
   displayName: "CoinList__CoinListContainer",
   componentId: "sc-1xno7ue-0"
 })(["width:1000px;margin:0 auto;padding-top:110px;padding-bottom:100px;"]);
+var CoinGraphContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
+  displayName: "CoinList__CoinGraphContainer",
+  componentId: "sc-1xno7ue-1"
+})(["margin-bottom:30px;"]);
 var CoinWrap = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "CoinList__CoinWrap",
-  componentId: "sc-1xno7ue-1"
+  componentId: "sc-1xno7ue-2"
 })(["display:inline-block;padding:12.5px 0;width:125px;text-align:center;border:1px solid #fcfcfd;font-weight:bold;"]);
 
 var CoinList =
@@ -481,46 +485,53 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(CoinList)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      status: true //To trigger rerendering page
-
+      status: true,
+      //To trigger rerendering page
+      socket: {}
     });
 
     _defineProperty(_assertThisInitialized(_this), "getCoinList",
     /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var ret, coins, coinsParsed;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoApiUrl"], "/data/top/totalvolfull?limit=100&tsym=USD"));
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(gauge) {
+        var ret, coins, coinsParsed;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoApiUrl"], "/data/top/totalvolfull?limit=100&tsym=USD"));
 
-            case 2:
-              ret = _context.sent;
-              coins = ret.data.Data;
-              coinsParsed = {};
-              coins.forEach(function (coin) {
-                coin = {
-                  name: coin.RAW.USD.FROMSYMBOL,
-                  price: coin.RAW.USD.PRICE.toFixed(2)
-                };
-                coinsParsed[coin.name] = coin;
-              });
+              case 2:
+                ret = _context.sent;
+                coins = ret.data.Data;
+                coinsParsed = {};
+                coins.forEach(function (coin) {
+                  coin = {
+                    name: coin.RAW.USD.FROMSYMBOL,
+                    price: coin.RAW.USD.PRICE.toFixed(2)
+                  };
+                  coinsParsed[coin.name] = coin;
+                });
 
-              _this.props.getCoinPrice(coinsParsed);
+                _this.props.getCoinPrice(coinsParsed);
 
-              _this.subscribeStream(Object.keys(coinsParsed), coinsParsed);
+                _this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge);
 
-            case 8:
-            case "end":
-              return _context.stop();
+              case 8:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee);
-    })));
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
 
     return _this;
   }
@@ -528,31 +539,94 @@ function (_React$Component) {
   _createClass(CoinList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getCoinList();
+      var gauge = []; //var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+
+      var config1 = liquidFillGaugeDefaultSettings();
+      config1.waveAnimateTime = 5000;
+      config1.waveHeight = 0.08;
+      config1.waveOffset = 0.25;
+      config1.valueCountUp = false;
+      config1.displayPercent = false;
+      config1.textSize = 0.75;
+      config1.minValue = 7500;
+      config1.maxValue = 8500;
+      gauge[0] = loadLiquidFillGauge("fillgauge1", 0, config1);
+      var config2 = liquidFillGaugeDefaultSettings();
+      config2.waveAnimateTime = 5000;
+      config2.waveHeight = 0.08;
+      config2.waveOffset = 0.25;
+      config2.valueCountUp = false;
+      config2.displayPercent = false;
+      config2.textSize = 0.75;
+      config2.minValue = 100;
+      config2.maxValue = 500;
+      gauge[1] = loadLiquidFillGauge("fillgauge2", 0, config2);
+      var config3 = liquidFillGaugeDefaultSettings();
+      config3.waveAnimateTime = 5000;
+      config3.waveHeight = 0.08;
+      config3.waveOffset = 0.25;
+      config3.valueCountUp = false;
+      config3.displayPercent = false;
+      config3.textSize = 0.75;
+      config3.minValue = 0;
+      config3.maxValue = 20;
+      gauge[2] = loadLiquidFillGauge("fillgauge3", 0, config3);
+      var config4 = liquidFillGaugeDefaultSettings();
+      config4.waveAnimateTime = 5000;
+      config4.waveHeight = 0.08;
+      config4.waveOffset = 0.25;
+      config4.valueCountUp = false;
+      config4.displayPercent = false;
+      config4.textSize = 0.75;
+      config4.minValue = 50;
+      config4.maxValue = 200;
+      gauge[3] = loadLiquidFillGauge("fillgauge4", 0, config4);
+      var config5 = liquidFillGaugeDefaultSettings();
+      config5.waveAnimateTime = 5000;
+      config5.waveHeight = 0.08;
+      config5.waveOffset = 0.25;
+      config5.valueCountUp = false;
+      config5.displayPercent = false;
+      config5.textSize = 0.75;
+      config5.minValue = 200;
+      config5.maxValue = 600;
+      gauge[4] = loadLiquidFillGauge("fillgauge5", 0, config5);
+      this.getCoinList(gauge);
+    }
+  }, {
+    key: "updageGauge",
+    value: function updageGauge() {}
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this.socket) {
+        this.socket.close();
+        this.socket.disconnect();
+      }
     }
   }, {
     key: "subscribeStream",
-    value: function subscribeStream(symbols, coins) {
+    value: function subscribeStream(symbols, coins, gauge) {
       var _this2 = this;
 
       /*
         Subscribe to websocket stream using coin symbols.
       */
-      var cryptoio = io.connect(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoStreamUrl"]);
+      this.socket = io.connect(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoStreamUrl"]);
       var subscriptions = [];
       symbols.forEach(function (symbol) {
         subscriptions.push('5~CCCAGG~' + symbol + '~USD');
       });
-      cryptoio.emit('SubAdd', {
+      this.socket.emit('SubAdd', {
         'subs': subscriptions
       });
-      cryptoio.on('m', function (message) {
-        _this2.handleMessage(message, coins);
+      this.socket.on('m', function (message) {
+        _this2.handleMessage(message, coins, gauge);
       });
     }
   }, {
     key: "handleMessage",
-    value: function handleMessage(message, coins) {
+    value: function handleMessage(message, coins, gauge) {
       //console.log('coins', this.props.coins)
       message = message.split('~'); // coin value goes up(1) or down(2)
 
@@ -570,12 +644,12 @@ function (_React$Component) {
           coin.isDown = true;
         }
 
-        this.updateCoin(coin, coins);
+        this.updateCoin(coin, coins, gauge);
       }
     }
   }, {
     key: "updateCoin",
-    value: function updateCoin(coin, coins) {
+    value: function updateCoin(coin, coins, gauge) {
       var _this3 = this;
 
       var status = this.state.status;
@@ -584,6 +658,19 @@ function (_React$Component) {
       });
       coins[coin.name] = coin;
       this.props.getCoinPrice(coins);
+      Object.values(coins).map(function (ele, index) {
+        if (ele.name == "BTC") {
+          gauge[0].update(parseFloat(ele.price));
+        } else if (ele.name == "ETH") {
+          gauge[1].update(parseFloat(ele.price));
+        } else if (ele.name == "EOS") {
+          gauge[2].update(parseFloat(ele.price));
+        } else if (ele.name == "LTC") {
+          gauge[3].update(parseFloat(ele.price));
+        } else if (ele.name == "BCH") {
+          gauge[4].update(parseFloat(ele.price));
+        }
+      });
       /*
         Reset coin status after short interval to remove binded css classes.
         This will allow tick animations be reapplied and play again.
@@ -602,7 +689,27 @@ function (_React$Component) {
       if (!this.props.coins) {
         return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinListContainer, null, Object.values(this.props.coins).map(function (ele) {
+        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinListContainer, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinGraphContainer, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+          id: "fillgauge1",
+          width: "19%",
+          height: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+          id: "fillgauge2",
+          width: "19%",
+          height: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+          id: "fillgauge3",
+          width: "19%",
+          height: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+          id: "fillgauge4",
+          width: "19%",
+          height: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+          id: "fillgauge5",
+          width: "19%",
+          height: "200"
+        })), Object.values(this.props.coins).map(function (ele) {
           return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinWrap, {
             key: ele.name,
             className: classname__WEBPACK_IMPORTED_MODULE_9___default()({
@@ -694,8 +801,8 @@ var Navi = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].li.withConf
 var Logo = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img.withConfig({
   displayName: "Header__Logo",
   componentId: "sc-1fjhu9s-2"
-})(["display:inline-block;height:35px;vertical-align:middle;"]);
-var naviList = ['Exchange', 'News', 'App', 'About', 'Labs', 'Homepage'];
+})(["display:inline-block;height:35px;vertical-align:middle;cursor:pointer;"]);
+var naviList = ['Exchange', 'News', 'App', 'About', 'Labs', 'Partners'];
 
 var Header = function Header(props) {
   var bgClass = classname__WEBPACK_IMPORTED_MODULE_4___default()({
@@ -703,9 +810,11 @@ var Header = function Header(props) {
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Bar, {
     className: bgClass
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
     src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_3___default.a
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     style: {
       display: 'inline-block',
       marginLeft: '30px'
@@ -32924,10 +33033,10 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ "./pages/homepage.js":
-/*!***************************!*\
-  !*** ./pages/homepage.js ***!
-  \***************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32993,31 +33102,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var Body = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
-  displayName: "homepage__Body",
-  componentId: "y03z3t-0"
+  displayName: "pages__Body",
+  componentId: "sc-1ao6dy1-0"
 })(["background:#ebeef0;"]);
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
-  displayName: "homepage__Container",
-  componentId: "y03z3t-1"
+  displayName: "pages__Container",
+  componentId: "sc-1ao6dy1-1"
 })(["height:500px;background:url(", ") no-repeat 100% 100%;background-size:1920px;.title{padding-top:180px;width:1000px;margin:0 auto;}img{width:290px;margin:5px;}.ant-carousel{padding-top:180px;.slick-slider{height:300px;width:1200px;margin:0 auto;}.slick-slide{img{display:inline-block;}}h2{font-size:30px;color:#fff;}}"], _assets_img_home_bg_jpg__WEBPACK_IMPORTED_MODULE_5___default.a);
 
-var Home =
+var Index =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Home, _React$Component);
+  _inherits(Index, _React$Component);
 
-  function Home() {
+  function Index() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, Home);
+    _classCallCheck(this, Index);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Home)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Index)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       isDark: false
@@ -33038,7 +33147,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(Home, [{
+  _createClass(Index, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       window.addEventListener('scroll', this.onScroll);
@@ -33057,6 +33166,12 @@ function (_React$Component) {
         isDark: isDark
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_12___default.a, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("script", {
         src: "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("script", {
+        src: "http://d3js.org/d3.v3.min.js",
+        language: "JavaScript"
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("script", {
+        src: "/static/liquidFillGauge.js",
+        language: "JavaScript"
       })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Body, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Container, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(antd_lib_carousel__WEBPACK_IMPORTED_MODULE_1___default.a, _extends({
         autoplay: true
       }, CarouselSettings), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", null, "A Premier Global Digital Asset Trading Platform")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
@@ -33073,10 +33188,10 @@ function (_React$Component) {
     }
   }]);
 
-  return Home;
+  return Index;
 }(react__WEBPACK_IMPORTED_MODULE_2___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (Index);
     (function (Component, route) {
       if(!Component) return
       if (false) {}
@@ -33093,7 +33208,7 @@ function (_React$Component) {
           next.router.update(r, Component)
         }
       }
-    })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/homepage")
+    })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/")
   
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/next/node_modules/webpack/buildin/harmony-module.js */ "./node_modules/next/node_modules/webpack/buildin/harmony-module.js")(module)))
 
@@ -33229,14 +33344,14 @@ function initializeStore() {
 /***/ }),
 
 /***/ 3:
-/*!*********************************!*\
-  !*** multi ./pages/homepage.js ***!
-  \*********************************/
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__NEXT_REGISTER_PAGE('/homepage', function() {
-module.exports = __webpack_require__(/*! ./pages/homepage.js */"./pages/homepage.js");
+__NEXT_REGISTER_PAGE('/', function() {
+module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
 
 return { page: module.exports.default }});
 
@@ -33254,4 +33369,4 @@ module.exports = dll_114c37924188cb7dc18b;
 /***/ })
 
 },[[3,"static/runtime/webpack.js","styles"]]]));;
-//# sourceMappingURL=homepage.js.map
+//# sourceMappingURL=index.js.map
