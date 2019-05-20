@@ -93,6 +93,33 @@ if (process.env.NODE_ENV === 'dev') {
   // api 接口
   server.get('/api/partners', getPartners)
 
+  server.get('/api/get_btc_initial_price', (req, res) => {
+    axios({
+      timeout: 10000,
+      method: 'GET',
+      url: `http://api.bitcoincharts.com/v1/trades.csv?symbol=bitstampUSD`,
+      data: req.body,
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      transformRequest: (obj) => {
+        return qs.stringify(obj)
+      },
+    })
+    .then((ret) => {
+      ret.data.success = true
+      return res.json(ret.data)
+    })
+    .catch((e) => {
+      return res.status(500).send({
+        code: -9999,
+        data: 'node error',
+        msg: e.message,
+        success: false,
+      })
+    })
+  })
+
   server.get('*', (req, res) => {
     const parsedUrl = parse(req.url, true)
     // 这几个特殊文件不需要加static路径访问

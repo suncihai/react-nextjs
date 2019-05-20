@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash';
 import React from 'react'
 import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
@@ -7,12 +8,28 @@ import { connect } from 'react-redux'
 import { cryptoApiUrl, cryptoStreamUrl } from '../common/js/const'
 import { getCoinPrice } from '../store'
 import cx from 'classname'
+import {Sparklines,SparklinesLine,SparklinesReferenceLine} from 'react-sparklines';
 
 const CoinListContainer = styled.div`
    width: 1000px;
    margin: 0 auto;
    padding-top: 110px;
    padding-bottom: 100px;
+   .min-max-value {
+     display: inline-block;
+     height: 250px;
+     position: relative;
+     div {
+       &.max {
+         position: absolute;
+         top: 0;
+       }
+       &.min {
+         position: absolute;
+         bottom: 0;
+       }
+     }
+   }
 `
 
 const CoinGraphContainer = styled.div`
@@ -45,6 +62,7 @@ class CoinList extends React.Component {
    state = {
       status: true,  //To trigger rerendering page
       socket: {},
+      btcData: [],
    }
 
    componentDidMount() {      
@@ -128,7 +146,19 @@ class CoinList extends React.Component {
     getCoinList = async (gauge) => {
       const ret = await axios.get(`${cryptoApiUrl}/data/top/totalvolfull?limit=100&tsym=USD`)
       const coins = ret.data.Data
-  
+
+      let initialBTC = await axiosClient({
+        method: 'GET',
+        url: '/api/get_btc_initial_price',
+      })
+
+      let tmp = initialBTC.split(",")
+      let btcPrice = []
+      for(let i = 0;i<100;i++){
+        btcPrice.push(parseFloat(tmp[2*i+1]))
+      }
+      this.setState({btcData:btcPrice})
+
       let coinsParsed = {}
   
       coins.forEach(coin => {
@@ -204,6 +234,10 @@ class CoinList extends React.Component {
             gauge[3].update(parseInt(num[0][3]))
             gauge[4].update(parseInt(num[1][0]))
             gauge[5].update(parseInt(num[1][1]))
+
+            let arr = this.state.btcData
+            arr.push(parseFloat(ele.price).toFixed(2))
+            this.setState({btcData:arr})
          }
       })
       /*
@@ -225,9 +259,22 @@ class CoinList extends React.Component {
             </>
          )
       }else{
+         const graphCss = {
+           width: '1000px',
+           height: '250px'
+         }
+         
          return (
            <>
             <CoinListContainer>
+               <Sparklines style={graphCss} data={this.state.btcData} limit={100}>
+                 <SparklinesLine color="#08aba6"/>
+                 {/* <SparklinesReferenceLine type="min"/> */}
+               </Sparklines>
+               <div className="min-max-value">
+                 <div className="max">${_.max(this.state.btcData)}</div>
+                 <div className="min">${_.min(this.state.btcData)}</div>
+               </div>
                <CoinGraphContainer>
                   <span>BTC</span>
                   <svg id="fillgauge1" width="70" height="70"></svg>

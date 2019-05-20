@@ -459,18 +459,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _common_js_axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/js/axios */ "./common/js/axios.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Loading */ "./components/Loading.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _common_js_const__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/js/const */ "./common/js/const.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store */ "./store.js");
-/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! classname */ "classname");
-/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(classname__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_js_axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/js/axios */ "./common/js/axios.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Loading */ "./components/Loading.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _common_js_const__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/js/const */ "./common/js/const.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store */ "./store.js");
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! classname */ "classname");
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(classname__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var react_sparklines__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-sparklines */ "react-sparklines");
+/* harmony import */ var react_sparklines__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_sparklines__WEBPACK_IMPORTED_MODULE_11__);
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -506,15 +510,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var CoinListContainer = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.div.withConfig({
+
+
+var CoinListContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "CoinList__CoinListContainer",
   componentId: "sc-1xno7ue-0"
-})(["width:1000px;margin:0 auto;padding-top:110px;padding-bottom:100px;"]);
-var CoinGraphContainer = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.div.withConfig({
+})(["width:1000px;margin:0 auto;padding-top:110px;padding-bottom:100px;.min-max-value{display:inline-block;height:250px;position:relative;div{&.max{position:absolute;top:0;}&.min{position:absolute;bottom:0;}}}"]);
+var CoinGraphContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "CoinList__CoinGraphContainer",
   componentId: "sc-1xno7ue-1"
 })(["margin-bottom:30px;svg{margin-right:10px;}#fillgauge4{margin-right:25px;}span{display:inline-block;vertical-align:top;line-height:75px;font-size:20px;font-weight:bold;margin-right:15px;}"]);
-var CoinWrap = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.div.withConfig({
+var CoinWrap = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "CoinList__CoinWrap",
   componentId: "sc-1xno7ue-2"
 })(["display:inline-block;padding:12.5px 0;width:125px;text-align:center;border:1px solid #fcfcfd;font-weight:bold;"]);
@@ -540,7 +546,8 @@ function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       status: true,
       //To trigger rerendering page
-      socket: {}
+      socket: {},
+      btcData: []
     });
 
     _defineProperty(_assertThisInitialized(_this), "getCoinList",
@@ -549,17 +556,36 @@ function (_React$Component) {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(gauge) {
-        var ret, coins, coinsParsed;
+        var ret, coins, initialBTC, tmp, btcPrice, i, coinsParsed;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoApiUrl"], "/data/top/totalvolfull?limit=100&tsym=USD"));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_common_js_const__WEBPACK_IMPORTED_MODULE_8__["cryptoApiUrl"], "/data/top/totalvolfull?limit=100&tsym=USD"));
 
               case 2:
                 ret = _context.sent;
                 coins = ret.data.Data;
+                _context.next = 6;
+                return Object(_common_js_axios__WEBPACK_IMPORTED_MODULE_4__["axiosClient"])({
+                  method: 'GET',
+                  url: '/api/get_btc_initial_price'
+                });
+
+              case 6:
+                initialBTC = _context.sent;
+                tmp = initialBTC.split(",");
+                btcPrice = [];
+
+                for (i = 0; i < 100; i++) {
+                  btcPrice.push(parseFloat(tmp[2 * i + 1]));
+                }
+
+                _this.setState({
+                  btcData: btcPrice
+                });
+
                 coinsParsed = {};
                 coins.forEach(function (coin) {
                   coin = {
@@ -573,7 +599,7 @@ function (_React$Component) {
 
                 _this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge);
 
-              case 8:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -674,7 +700,7 @@ function (_React$Component) {
       /*
         Subscribe to websocket stream using coin symbols.
       */
-      this.socket = io.connect(_common_js_const__WEBPACK_IMPORTED_MODULE_7__["cryptoStreamUrl"]);
+      this.socket = io.connect(_common_js_const__WEBPACK_IMPORTED_MODULE_8__["cryptoStreamUrl"]);
       var subscriptions = [];
       symbols.forEach(function (symbol) {
         subscriptions.push('5~CCCAGG~' + symbol + '~USD');
@@ -730,6 +756,12 @@ function (_React$Component) {
           gauge[3].update(parseInt(num[0][3]));
           gauge[4].update(parseInt(num[1][0]));
           gauge[5].update(parseInt(num[1][1]));
+          var arr = _this3.state.btcData;
+          arr.push(parseFloat(ele.price).toFixed(2));
+
+          _this3.setState({
+            btcData: arr
+          });
         }
       });
       /*
@@ -748,50 +780,66 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       if (!this.props.coins) {
-        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+        return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinListContainer, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinGraphContainer, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", null, "BTC"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        var graphCss = {
+          width: '1000px',
+          height: '250px'
+        };
+        return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CoinListContainer, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_sparklines__WEBPACK_IMPORTED_MODULE_11__["Sparklines"], {
+          style: graphCss,
+          data: this.state.btcData,
+          limit: 100
+        }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_sparklines__WEBPACK_IMPORTED_MODULE_11__["SparklinesLine"], {
+          color: "#08aba6"
+        })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+          className: "min-max-value"
+        }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+          className: "max"
+        }, "$", lodash__WEBPACK_IMPORTED_MODULE_2___default.a.max(this.state.btcData)), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+          className: "min"
+        }, "$", lodash__WEBPACK_IMPORTED_MODULE_2___default.a.min(this.state.btcData))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CoinGraphContainer, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", null, "BTC"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge1",
           width: "70",
           height: "70"
-        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge2",
           width: "70",
           height: "70"
-        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge3",
           width: "70",
           height: "70"
-        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge4",
           width: "70",
           height: "70"
-        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge5",
           width: "70",
           height: "70"
-        }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("svg", {
+        }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("svg", {
           id: "fillgauge6",
           width: "70",
           height: "70"
         })), Object.values(this.props.coins).map(function (ele) {
-          return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CoinWrap, {
+          return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CoinWrap, {
             key: ele.name,
-            className: classname__WEBPACK_IMPORTED_MODULE_9___default()({
+            className: classname__WEBPACK_IMPORTED_MODULE_10___default()({
               'tickGreen': ele.isUp,
               'tickRed': ele.isDown
             })
-          }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, ele.name), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, "$", ele.price));
+          }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, ele.name), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, "$", ele.price));
         })));
       }
     }
   }]);
 
   return CoinList;
-}(react__WEBPACK_IMPORTED_MODULE_2___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
 
 var mapDispatchToProps = {
-  getCoinPrice: _store__WEBPACK_IMPORTED_MODULE_8__["getCoinPrice"]
+  getCoinPrice: _store__WEBPACK_IMPORTED_MODULE_9__["getCoinPrice"]
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
@@ -801,7 +849,7 @@ var mapStateToProps = function mapStateToProps(_ref2) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(CoinList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(CoinList));
 
 /***/ }),
 
@@ -1403,6 +1451,17 @@ module.exports = require("crypto-js/md5");
 
 /***/ }),
 
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
+
+/***/ }),
+
 /***/ "next/head":
 /*!****************************!*\
   !*** external "next/head" ***!
@@ -1455,6 +1514,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "react-sparklines":
+/*!***********************************!*\
+  !*** external "react-sparklines" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-sparklines");
 
 /***/ }),
 
