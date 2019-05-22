@@ -18,6 +18,6 @@ const pullPromise = (paramKey, createPromiseFn) => {
 }
 
 module.exports = {
-  pendingRecord: pendingRecord,
-  pullPromise: pullPromise
+  pendingRecord,
+  pullPromise,
 }

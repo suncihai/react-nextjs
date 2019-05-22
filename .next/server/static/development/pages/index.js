@@ -515,7 +515,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var CoinListContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "CoinList__CoinListContainer",
   componentId: "sc-1xno7ue-0"
-})(["width:1000px;margin:0 auto;padding-top:110px;padding-bottom:100px;.min-max-value{display:inline-block;height:250px;position:relative;div{&.max{position:absolute;top:0;}&.min{position:absolute;bottom:0;}}}"]);
+})(["width:1000px;margin:0 auto;padding-top:110px;padding-bottom:100px;.min-max-value{display:inline-block;height:200px;position:relative;div{&.max{position:absolute;top:0;}&.min{position:absolute;bottom:0;}}}"]);
 var CoinGraphContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "CoinList__CoinGraphContainer",
   componentId: "sc-1xno7ue-1"
@@ -556,7 +556,7 @@ function (_React$Component) {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(gauge) {
-        var ret, coins, initialBTC, testUser, tmp, btcPrice, i, coinsParsed;
+        var ret, coins, initialBTC, testaddUser, testUser, tmp, btcPrice, i, coinsParsed;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -578,10 +578,21 @@ function (_React$Component) {
                 _context.next = 9;
                 return Object(_common_js_axios__WEBPACK_IMPORTED_MODULE_4__["axiosClient"])({
                   method: 'GET',
-                  url: '/api/getusers'
+                  url: '/api/deleteuser',
+                  params: {
+                    name: "Mary"
+                  }
                 });
 
               case 9:
+                testaddUser = _context.sent;
+                _context.next = 12;
+                return Object(_common_js_axios__WEBPACK_IMPORTED_MODULE_4__["axiosClient"])({
+                  method: 'GET',
+                  url: '/api/getusers'
+                });
+
+              case 12:
                 testUser = _context.sent;
                 console.log('testUser', testUser);
                 tmp = initialBTC.split(",");
@@ -608,7 +619,7 @@ function (_React$Component) {
 
                 _this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge);
 
-              case 19:
+              case 22:
               case "end":
                 return _context.stop();
             }
@@ -790,13 +801,14 @@ function (_React$Component) {
       } else {
         var graphCss = {
           width: '1000px',
-          height: '250px'
+          height: '200px'
         };
         return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CoinListContainer, null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_sparklines__WEBPACK_IMPORTED_MODULE_11__["Sparklines"], {
           style: graphCss,
           data: this.state.btcData,
           limit: 100
         }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_sparklines__WEBPACK_IMPORTED_MODULE_11__["SparklinesLine"], {
+          strokeWidth: "1",
           color: "#08aba6"
         })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
           className: "min-max-value"

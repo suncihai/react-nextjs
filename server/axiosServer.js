@@ -18,5 +18,5 @@ const axiosServer = axios.create({
 })
 
 module.exports = {
-  axiosServer: axiosServer,
+  axiosServer,
 }

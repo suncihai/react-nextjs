@@ -17,7 +17,7 @@ const CoinListContainer = styled.div`
    padding-bottom: 100px;
    .min-max-value {
      display: inline-block;
-     height: 250px;
+     height: 200px;
      position: relative;
      div {
        &.max {
@@ -148,6 +148,14 @@ class CoinList extends React.Component {
         url: '/api/get_btc_initial_price',
       })
 
+      let testaddUser = await axiosClient({
+        method: 'GET',
+        url: '/api/deleteuser',
+        params: {
+          name: "Mary",
+        }
+      })
+
       let testUser = await axiosClient({
         method: 'GET',
         url: '/api/getusers',
@@ -263,14 +271,14 @@ class CoinList extends React.Component {
       }else{
          const graphCss = {
            width: '1000px',
-           height: '250px'
+           height: '200px'
          }
          
          return (
            <>
             <CoinListContainer>
                <Sparklines style={graphCss} data={this.state.btcData} limit={100}>
-                 <SparklinesLine color="#08aba6"/>
+                 <SparklinesLine strokeWidth="1" color="#08aba6"/>
                  {/* <SparklinesReferenceLine type="min"/> */}
                </Sparklines>
                <div className="min-max-value">

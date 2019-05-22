@@ -82,6 +82,6 @@ const errorResponse = (req, res) => {
 }
 
 module.exports = {
-  responseWrap: responseWrap,
-  errorResponse: errorResponse
+  responseWrap,
+  errorResponse,
 }

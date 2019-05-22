@@ -16,5 +16,5 @@ const getPartners = (req, res) => {
 }
 
 module.exports = {
-  getPartners: getPartners,
+  getPartners,
 }
