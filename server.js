@@ -119,6 +119,34 @@ if (process.env.NODE_ENV === 'dev') {
       })
     })
   })
+  
+  //test with local api service, ok
+  server.get('/api/getusers', (req, res) => {
+    axios({
+      timeout: 10000,
+      method: 'GET',
+      url: `http://localhost:8080/getusers`,
+      data: req.body,
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      transformRequest: (obj) => {
+        return qs.stringify(obj)
+      },
+    })
+    .then((ret) => {
+      ret.data.success = true
+      return res.json(ret.data)
+    })
+    .catch((e) => {
+      return res.status(500).send({
+        code: -9999,
+        data: 'node error',
+        msg: e.message,
+        success: false,
+      })
+    })
+  })
 
   server.get('*', (req, res) => {
     const parsedUrl = parse(req.url, true)

@@ -132,10 +132,6 @@ class CoinList extends React.Component {
       this.getCoinList(gauge);
     }
 
-   updageGauge() {
-      
-   }
-
    componentWillUnmount() {
       if(this.socket) {
          this.socket.close()
@@ -151,6 +147,12 @@ class CoinList extends React.Component {
         method: 'GET',
         url: '/api/get_btc_initial_price',
       })
+
+      let testUser = await axiosClient({
+        method: 'GET',
+        url: '/api/getusers',
+      })
+      console.log('testUser', testUser)
 
       let tmp = initialBTC.split(",")
       let btcPrice = []

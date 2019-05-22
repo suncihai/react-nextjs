@@ -556,7 +556,7 @@ function (_React$Component) {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(gauge) {
-        var ret, coins, initialBTC, tmp, btcPrice, i, coinsParsed;
+        var ret, coins, initialBTC, testUser, tmp, btcPrice, i, coinsParsed;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -575,6 +575,15 @@ function (_React$Component) {
 
               case 6:
                 initialBTC = _context.sent;
+                _context.next = 9;
+                return Object(_common_js_axios__WEBPACK_IMPORTED_MODULE_4__["axiosClient"])({
+                  method: 'GET',
+                  url: '/api/getusers'
+                });
+
+              case 9:
+                testUser = _context.sent;
+                console.log('testUser', testUser);
                 tmp = initialBTC.split(",");
                 btcPrice = [];
 
@@ -599,7 +608,7 @@ function (_React$Component) {
 
                 _this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge);
 
-              case 15:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -681,9 +690,6 @@ function (_React$Component) {
       gauge[5] = loadLiquidFillGauge("fillgauge6", 0, config6);
       this.getCoinList(gauge);
     }
-  }, {
-    key: "updageGauge",
-    value: function updageGauge() {}
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
@@ -917,7 +923,7 @@ var Logo = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConf
   displayName: "Header__Logo",
   componentId: "sc-1fjhu9s-2"
 })(["display:inline-block;height:35px;vertical-align:middle;cursor:pointer;"]);
-var naviList = ['Exchange', 'News', 'App', 'About', 'Labs', 'Partners'];
+var naviList = ['Partners'];
 
 var Header = function Header(props) {
   var bgClass = classname__WEBPACK_IMPORTED_MODULE_4___default()({
