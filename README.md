@@ -20,3 +20,6 @@ created a React-nextjs-redux framework with custom-server.
 * WebSocket
 1. set up a new socket to get data
 2. while route changes, remember to close socket to prevent memory leak
+
+* Test API with SpringBoot
+1. use localhost:8080 to test with SpringBoot Restful API 
