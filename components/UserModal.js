@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { axiosClient } from '../common/js/axios'
 import { connect } from 'react-redux'
-import { Modal, Button, Form, Input, message } from 'antd'
-import { addUser, deleteUser } from '../store'
+import { Modal, Button, Form, Input, message, Spin } from 'antd'
+import { addUser } from '../store'
 
 class UserModal extends React.Component {
    state = {
@@ -43,7 +43,9 @@ class UserModal extends React.Component {
           this.setState({isShown: false, loading: false})
           message.success(`You Add ${params.name}!`)
         },800)
-     } 
+     } else if (ret.code === -2) {
+        message.error(`${params.name} is already on the list!`)
+     }
   }
    
    render() {
@@ -66,43 +68,44 @@ class UserModal extends React.Component {
            <Modal
              title="Add New User"
              visible={isShown}
-             loading={loading}
              footer={null}
              onOK={(e)=>this.handleSubmit(e)}
              onCancel={()=>this.setShown(false)}
            >
-              <Form {...formItemLayout} onSubmit={(e)=>this.handleSubmit(e)}>
-               <Form.Item label="Name">
-                  {getFieldDecorator('name', {
-                     rules: [
-                        {
-                           required: true,
-                           message: 'Please input user name',
-                        },
-                     ],
-                  })(<Input />)}
-               </Form.Item>
-               <Form.Item label="Age">
-                  {getFieldDecorator('age', {
-                     rules: [
-                        {
-                           required: true,
-                           message: 'Please input user age',
-                        },
-                     ],
-                  })(<Input />)}
-               </Form.Item>
-               <Form.Item>
-                  <Button type="primary" onClick={(e)=>this.handleSubmit(e)}>Add</Button>
-               </Form.Item>
-            </Form>
+              <Spin spinning={loading}>
+                  <Form {...formItemLayout} onSubmit={(e)=>this.handleSubmit(e)}>
+                     <Form.Item label="Name">
+                        {getFieldDecorator('name', {
+                           rules: [
+                              {
+                                 required: true,
+                                 message: 'Please input user name',
+                              },
+                           ],
+                        })(<Input />)}
+                     </Form.Item>
+                     <Form.Item label="Age">
+                        {getFieldDecorator('age', {
+                           rules: [
+                              {
+                                 required: true,
+                                 message: 'Please input user age',
+                              },
+                           ],
+                        })(<Input />)}
+                     </Form.Item>
+                     <Form.Item>
+                        <Button type="primary" onClick={(e)=>this.handleSubmit(e)}>Add</Button>
+                     </Form.Item>
+                  </Form>
+              </Spin>
            </Modal>
          </>
       )
    }
 }
 
-const mapDispatchToProps = { addUser, deleteUser }
+const mapDispatchToProps = { addUser }
 
 export default connect(
    null,

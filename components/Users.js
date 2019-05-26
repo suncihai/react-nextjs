@@ -3,8 +3,8 @@ import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import { connect } from 'react-redux'
-import { getUsers } from '../store'
-import { Table } from 'antd'
+import { getUsers, deleteUser } from '../store'
+import { Table, Button, message } from 'antd'
 import Column from 'antd/lib/table/Column';
 import UserModal from '../components/UserModal'
 
@@ -27,6 +27,9 @@ const UserWrap = styled.div`
    }
 `
 class Users extends React.Component {
+   state = {
+      loading: false,
+   }
 
    componentDidMount() {
       this.getUsers()
@@ -43,17 +46,42 @@ class Users extends React.Component {
       } 
    }
 
+   deleteUser = async (name) => {
+      this.setState({loading: true})
+      const ret = await axiosClient({
+        method: 'GET',
+        url: '/api/deleteuser',
+        params: {name: name},
+      })
+
+     if (ret.code === 0) {
+        setTimeout(()=>{
+          this.setState({loading: false})
+          this.props.deleteUser(name)
+        },800)
+     } 
+  }
+
    render(){
-      const users = this.props.users;
+      const users = this.props.users
+      const { loading } = this.state
 
       if(!users) {
          return <Loading /> 
       }else{
          return (
            <UsersContainer>
-             <Table dataSource={users} rowKey={users => users.name}>
+             <Table loading={loading} dataSource={users} rowKey={users => users.name}>
                <Column title="Name" dataIndex="name" key="name"></Column>
                <Column title="Age" dataIndex="age" key="age"></Column>
+               <Column 
+                  title="Action" 
+                  key="action"
+                  render={(text, user) => (
+                     <span>
+                       <Button type="primary" onClick={()=>this.deleteUser(user.name)}>Delete</Button>
+                     </span>
+                   )}/>
              </Table>
              <UserModal />
            </UsersContainer>
@@ -62,7 +90,7 @@ class Users extends React.Component {
    }
 }
 
-const mapDispatchToProps = { getUsers }
+const mapDispatchToProps = { getUsers, deleteUser }
 const mapStateToProps = ({users}) => ({users})
 
 export default connect(

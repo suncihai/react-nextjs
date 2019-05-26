@@ -8,7 +8,7 @@ const Body = styled.div`
 `
 
 const Container = styled.div`
-    height: 100vh;
+    min-height: 97vh;
     background: #fff;
 `
 
