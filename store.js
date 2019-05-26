@@ -7,6 +7,7 @@ const InitialState = {
   count: 0,
   partners: {},
   coins: {},
+  users: null,
 }
 
 export const actionTypes = {
@@ -16,6 +17,9 @@ export const actionTypes = {
   RESET: 'RESET',
   GETPARTNERS: 'GETPARTNERS',
   GETCOINPRICE: 'GETCOINPRICE',
+  GETUSERS: 'GETUSERS',
+  ADDUSER: 'ADDUSER',
+  DELETEUSER: 'DELETEUSER'
 }
 
 // REDUCERS
@@ -45,6 +49,18 @@ export const reducer = (state = InitialState, action) => {
     case actionTypes.GETCOINPRICE:
       return Object.assign({}, state, {
         coins: action.payload
+      })
+    case actionTypes.GETUSERS:
+      return Object.assign({}, state, {
+        users: action.payload
+      })
+    case actionTypes.ADDUSER:
+      return Object.assign({}, state, {
+        users: state.users.concat(action.payload)
+      })
+    case actionTypes.DELETEUSER:
+      return Object.assign({}, state, {
+        users: state.users.filter(user=>user.name!=action.payload)
       })
     default:
       return state
@@ -77,6 +93,18 @@ export const getPartners = (data) => {
 
 export const getCoinPrice = (data) => {
   return { type: actionTypes.GETCOINPRICE, payload: data }
+}
+
+export const getUsers = (data) => {
+  return { type: actionTypes.GETUSERS, payload: data }
+}
+
+export const addUser = (data) => {
+  return { type: actionTypes.ADDUSER, payload: data }
+}
+
+export const deleteUser = (data) => {
+  return { type: actionTypes.DELETEUSER, payload: data }
 }
 
 export function initializeStore (initialState = InitialState) {

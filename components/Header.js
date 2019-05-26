@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import LogoImg from '../assets/img/logo.png'
+import LogoImg2 from '../assets/img/logo2.png'
 import cx from 'classname'
 
 const Bar = styled.div`
@@ -15,6 +16,10 @@ const Bar = styled.div`
    transition: ease 0.5s;
    &.isDark {
       background: #0e1118;
+   }
+   &.light {
+      background: #fff;
+      color: #000;
    }
 `
 
@@ -34,19 +39,20 @@ const Logo = styled.img`
    cursor: pointer;
 `
 
-const naviList = ['Partners']
+const naviList = ['Partners','User']
 
 const Header = (props) => {
 
   const bgClass = cx({
-     'isDark': props.isDark
+     'isDark': props.isDark,
+     'light': props.light,
   })
 
   return (
    <div>
       <Bar className={bgClass}>
          <Link href={`/`}>
-            <Logo src={LogoImg} />
+            <Logo src={!props.light ? LogoImg : LogoImg2} />
          </Link>
          <ul style={{display:'inline-block',marginLeft: '30px'}}>
          {

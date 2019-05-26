@@ -3,7 +3,7 @@ import Footer from './Footer'
 
 const Layout = props => (
   <>
-     <Header isDark={props.isDark}/>
+     <Header isDark={props.isDark} light={props.light}/>
      {props.children}
      <Footer />
   </>

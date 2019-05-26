@@ -14,7 +14,7 @@ const responseWrap = (req, res, config) => {
       try {
         return res.json(data.data)
       } catch(e) {
-        log.error('10001', req.url, e.message);
+        //log.error('10001', req.url, e.message);
         return res.status(200).send({
           code: -6,
           data: 'node unlogin code === -6',
@@ -30,7 +30,7 @@ const responseWrap = (req, res, config) => {
         }
         return res.json(data.data)
       } catch(e) {
-        log.error('10002', req.url, e.message);
+        //log.error('10002', req.url, e.message);
         return res.status(200).send({
           code: -6,
           data: 'node unlogin res.json(data.data)',
@@ -41,10 +41,10 @@ const responseWrap = (req, res, config) => {
     }
     if (+data.status !== 200) {
       try {
-        log.error('10003', req.url, data);
+        //log.error('10003', req.url, data);
         return res.send(data)
       } catch(e) {
-        log.error('10004', req.url, e.message);
+        //log.error('10004', req.url, e.message);
         return res.status(200).send({
           code: -6,
           data: 'node unlogin status !== 200',
@@ -61,7 +61,7 @@ const errorResponse = (req, res) => {
       if (paramKey) {
         delete pendingRecord[paramKey]
       }
-      log.error('10005', req.url, err.message);
+      //log.error('10005', req.url, err.message);
       return res.status(500).send({
         code: -9999,
         data: 'node error',
@@ -71,7 +71,7 @@ const errorResponse = (req, res) => {
     }
   } catch(e) {
     return (err) => {
-      log.error('10006', req.url, err.message);
+      //log.error('10006', req.url, err.message);
       return res.status(200).send({
         code: -6,
         data: 'node unlogin errorResponse',

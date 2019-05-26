@@ -148,20 +148,6 @@ class CoinList extends React.Component {
         url: '/api/get_btc_initial_price',
       })
 
-      let testaddUser = await axiosClient({
-        method: 'GET',
-        url: '/api/deleteuser',
-        params: {
-          name: "Mary",
-        }
-      })
-
-      let testUser = await axiosClient({
-        method: 'GET',
-        url: '/api/getusers',
-      })
-      console.log('testUser', testUser)
-
       let tmp = initialBTC.split(",")
       let btcPrice = []
       for(let i = 0;i<100;i++){
@@ -279,7 +265,6 @@ class CoinList extends React.Component {
             <CoinListContainer>
                <Sparklines style={graphCss} data={this.state.btcData} limit={100}>
                  <SparklinesLine strokeWidth="1" color="#08aba6"/>
-                 {/* <SparklinesReferenceLine type="min"/> */}
                </Sparklines>
                <div className="min-max-value">
                  <div className="max">${_.max(this.state.btcData)}</div>

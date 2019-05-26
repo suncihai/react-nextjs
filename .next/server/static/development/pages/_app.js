@@ -343,7 +343,7 @@ function (_App) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, deleteUser, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -357,6 +357,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetCount", function() { return resetCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPartners", function() { return getPartners; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCoinPrice", function() { return getCoinPrice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUser", function() { return addUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
@@ -369,7 +372,8 @@ var InitialState = {
   light: false,
   count: 0,
   partners: {},
-  coins: {}
+  coins: {},
+  users: null
 };
 var actionTypes = {
   TICK: 'TICK',
@@ -377,7 +381,10 @@ var actionTypes = {
   DECREMENT: 'DECREMENT',
   RESET: 'RESET',
   GETPARTNERS: 'GETPARTNERS',
-  GETCOINPRICE: 'GETCOINPRICE' // REDUCERS
+  GETCOINPRICE: 'GETCOINPRICE',
+  GETUSERS: 'GETUSERS',
+  ADDUSER: 'ADDUSER',
+  DELETEUSER: 'DELETEUSER' // REDUCERS
 
 };
 var reducer = function reducer() {
@@ -414,6 +421,23 @@ var reducer = function reducer() {
     case actionTypes.GETCOINPRICE:
       return Object.assign({}, state, {
         coins: action.payload
+      });
+
+    case actionTypes.GETUSERS:
+      return Object.assign({}, state, {
+        users: action.payload
+      });
+
+    case actionTypes.ADDUSER:
+      return Object.assign({}, state, {
+        users: state.users.concat(action.payload)
+      });
+
+    case actionTypes.DELETEUSER:
+      return Object.assign({}, state, {
+        users: state.users.filter(function (user) {
+          return user.name != action.payload;
+        })
       });
 
     default:
@@ -459,6 +483,24 @@ var getPartners = function getPartners(data) {
 var getCoinPrice = function getCoinPrice(data) {
   return {
     type: actionTypes.GETCOINPRICE,
+    payload: data
+  };
+};
+var getUsers = function getUsers(data) {
+  return {
+    type: actionTypes.GETUSERS,
+    payload: data
+  };
+};
+var addUser = function addUser(data) {
+  return {
+    type: actionTypes.ADDUSER,
+    payload: data
+  };
+};
+var deleteUser = function deleteUser(data) {
+  return {
+    type: actionTypes.DELETEUSER,
     payload: data
   };
 };
