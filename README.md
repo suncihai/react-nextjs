@@ -10,6 +10,7 @@ created a React-nextjs-redux framework with custom-server.
 
 * Layout
 1. use styled.component to define different components
+2. Antd Modal is tricky, hide footer button and customize own foot is better.
 
 * Redux
 1. use _app.js under pages folder, set the reduxStore
