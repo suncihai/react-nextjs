@@ -169,6 +169,12 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
+      "id": "./node_modules/antd/lib/input/style/index.css",
+      "name": "./node_modules/antd/lib/input/style/index.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
       "id": "./node_modules/antd/lib/icon/style/index.css",
       "name": "./node_modules/antd/lib/icon/style/index.css",
       "file": "static/chunks/styles.js",
@@ -189,12 +195,6 @@
     {
       "id": "./node_modules/antd/lib/grid/style/index.css",
       "name": "./node_modules/antd/lib/grid/style/index.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/input/style/index.css",
-      "name": "./node_modules/antd/lib/input/style/index.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },

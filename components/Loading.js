@@ -3,7 +3,7 @@ import antd from 'antd'
 
 const LoadingWrap= styled.div`
    background: transparent;
-   height: 500px;
+   min-height: 500px;
    line-height: 500px;
    width: 100%;
    text-align: center;
