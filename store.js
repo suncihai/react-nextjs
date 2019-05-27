@@ -8,6 +8,8 @@ const InitialState = {
   partners: {},
   coins: {},
   users: null,
+  searchword: "",
+  searchusers: null,
 }
 
 export const actionTypes = {
@@ -18,6 +20,8 @@ export const actionTypes = {
   GETPARTNERS: 'GETPARTNERS',
   GETCOINPRICE: 'GETCOINPRICE',
   GETUSERS: 'GETUSERS',
+  SEARCHWORD: 'SEARCHWORD',
+  SEARCHUSER: 'SEARCHUSER',
   ADDUSER: 'ADDUSER',
   DELETEUSER: 'DELETEUSER'
 }
@@ -57,6 +61,14 @@ export const reducer = (state = InitialState, action) => {
     case actionTypes.ADDUSER:
       return Object.assign({}, state, {
         users: state.users.concat(action.payload)
+      })
+    case actionTypes.SEARCHWORD:
+      return Object.assign({}, state, {
+        searchword: action.payload
+      })
+    case actionTypes.SEARCHUSER:
+      return Object.assign({}, state, {
+        searchusers: state.users.filter(user=>user.name.toLowerCase().indexOf(action.payload.toLowerCase())>-1)
       })
     case actionTypes.DELETEUSER:
       return Object.assign({}, state, {
@@ -101,6 +113,14 @@ export const getUsers = (data) => {
 
 export const addUser = (data) => {
   return { type: actionTypes.ADDUSER, payload: data }
+}
+
+export const searchWord = (data) => {
+  return { type: actionTypes.SEARCHWORD, payload: data }
+}
+
+export const searchUser = (data) => {
+  return { type: actionTypes.SEARCHUSER, payload: data }
 }
 
 export const deleteUser = (data) => {

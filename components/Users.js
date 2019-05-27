@@ -3,7 +3,7 @@ import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import { connect } from 'react-redux'
-import { getUsers, deleteUser } from '../store'
+import { getUsers, deleteUser, searchWord, searchUser } from '../store'
 import { Table, Button, message, Input } from 'antd'
 import Column from 'antd/lib/table/Column';
 import UserModal from '../components/UserModal'
@@ -30,7 +30,6 @@ const UserWrap = styled.div`
 class Users extends React.Component {
    state = {
       loading: false,
-      users: [],
    }
 
    componentDidMount() {
@@ -45,14 +44,13 @@ class Users extends React.Component {
 
       if (ret.code === 0) {
          this.props.getUsers(ret.data)
-         this.setState({users: ret.data})
+         this.props.searchUser(this.props.searchword)
       } 
    }
 
    searchUser = debounce((value) => {
-      let users = this.props.users;
-      users = users.filter(user=>user.name.toLowerCase().indexOf(value.toLowerCase())>-1)
-      this.setState({users: users})
+      this.props.searchWord(value)
+      this.props.searchUser(value)
    },250)
 
    deleteUser = async (name) => {
@@ -67,12 +65,14 @@ class Users extends React.Component {
         setTimeout(()=>{
           this.setState({loading: false})
           this.props.deleteUser(name)
+          this.props.searchUser(this.props.searchword)
         },800)
      } 
   }
 
    render(){
-      const { loading, users} = this.state
+      const { loading } = this.state
+      const users = this.props.searchusers
       const Search = Input.Search
 
       const searchStyle = {
@@ -104,15 +104,15 @@ class Users extends React.Component {
                      </span>
                    )}/>
              </Table>
-             <UserModal />
+             <UserModal updateUser={this.updateUser}/>
            </UsersContainer>
          )
       }
    }
 }
 
-const mapDispatchToProps = { getUsers, deleteUser }
-const mapStateToProps = ({users}) => ({users})
+const mapDispatchToProps = { getUsers, deleteUser, searchWord, searchUser }
+const mapStateToProps = ({users, searchword, searchusers}) => ({users, searchword, searchusers})
 
 export default connect(
    mapStateToProps,

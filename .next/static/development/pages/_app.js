@@ -15769,7 +15769,7 @@ function (_App) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, deleteUser, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, searchWord, searchUser, deleteUser, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15785,6 +15785,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCoinPrice", function() { return getCoinPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUser", function() { return addUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchWord", function() { return searchWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchUser", function() { return searchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
@@ -15798,7 +15800,9 @@ var InitialState = {
   count: 0,
   partners: {},
   coins: {},
-  users: null
+  users: null,
+  searchword: "",
+  searchusers: null
 };
 var actionTypes = {
   TICK: 'TICK',
@@ -15808,6 +15812,8 @@ var actionTypes = {
   GETPARTNERS: 'GETPARTNERS',
   GETCOINPRICE: 'GETCOINPRICE',
   GETUSERS: 'GETUSERS',
+  SEARCHWORD: 'SEARCHWORD',
+  SEARCHUSER: 'SEARCHUSER',
   ADDUSER: 'ADDUSER',
   DELETEUSER: 'DELETEUSER' // REDUCERS
 
@@ -15856,6 +15862,18 @@ var reducer = function reducer() {
     case actionTypes.ADDUSER:
       return Object.assign({}, state, {
         users: state.users.concat(action.payload)
+      });
+
+    case actionTypes.SEARCHWORD:
+      return Object.assign({}, state, {
+        searchword: action.payload
+      });
+
+    case actionTypes.SEARCHUSER:
+      return Object.assign({}, state, {
+        searchusers: state.users.filter(function (user) {
+          return user.name.toLowerCase().indexOf(action.payload.toLowerCase()) > -1;
+        })
       });
 
     case actionTypes.DELETEUSER:
@@ -15920,6 +15938,18 @@ var getUsers = function getUsers(data) {
 var addUser = function addUser(data) {
   return {
     type: actionTypes.ADDUSER,
+    payload: data
+  };
+};
+var searchWord = function searchWord(data) {
+  return {
+    type: actionTypes.SEARCHWORD,
+    payload: data
+  };
+};
+var searchUser = function searchUser(data) {
+  return {
+    type: actionTypes.SEARCHUSER,
     payload: data
   };
 };

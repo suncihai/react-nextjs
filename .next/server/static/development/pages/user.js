@@ -685,6 +685,8 @@ function (_React$Component) {
                   setTimeout(function () {
                     _this.props.addUser(ret.data);
 
+                    _this.props.searchUser(_this.props.searchword);
+
                     _this.setState({
                       isShown: false,
                       loading: false
@@ -694,6 +696,10 @@ function (_React$Component) {
                   }, 800);
                 } else if (ret.code === -2) {
                   antd_lib_message__WEBPACK_IMPORTED_MODULE_12___default.a.error("".concat(params.name, " is already on the list!"));
+
+                  _this.setState({
+                    loading: false
+                  });
                 }
 
               case 4:
@@ -818,9 +824,18 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_13___default.a.Component);
 
 var mapDispatchToProps = {
-  addUser: _store__WEBPACK_IMPORTED_MODULE_16__["addUser"]
+  addUser: _store__WEBPACK_IMPORTED_MODULE_16__["addUser"],
+  searchUser: _store__WEBPACK_IMPORTED_MODULE_16__["searchUser"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_15__["connect"])(null, mapDispatchToProps)(antd_lib_form__WEBPACK_IMPORTED_MODULE_5___default.a.create()(UserModal)));
+
+var mapStateToProps = function mapStateToProps(_ref2) {
+  var searchword = _ref2.searchword;
+  return {
+    searchword: searchword
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_15__["connect"])(mapStateToProps, mapDispatchToProps)(antd_lib_form__WEBPACK_IMPORTED_MODULE_5___default.a.create()(UserModal)));
 
 /***/ }),
 
@@ -930,8 +945,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Users)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      loading: false,
-      users: []
+      loading: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "getUsers",
@@ -956,9 +970,7 @@ function (_React$Component) {
               if (ret.code === 0) {
                 _this.props.getUsers(ret.data);
 
-                _this.setState({
-                  users: ret.data
-                });
+                _this.props.searchUser(_this.props.searchword);
               }
 
             case 4:
@@ -970,14 +982,9 @@ function (_React$Component) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "searchUser", Object(lodash__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function (value) {
-      var users = _this.props.users;
-      users = users.filter(function (user) {
-        return user.name.toLowerCase().indexOf(value.toLowerCase()) > -1;
-      });
+      _this.props.searchWord(value);
 
-      _this.setState({
-        users: users
-      });
+      _this.props.searchUser(value);
     }, 250));
 
     _defineProperty(_assertThisInitialized(_this), "deleteUser",
@@ -1014,6 +1021,8 @@ function (_React$Component) {
                     });
 
                     _this.props.deleteUser(name);
+
+                    _this.props.searchUser(_this.props.searchword);
                   }, 800);
                 }
 
@@ -1043,9 +1052,8 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$state = this.state,
-          loading = _this$state.loading,
-          users = _this$state.users;
+      var loading = this.state.loading;
+      var users = this.props.searchusers;
       var Search = antd_lib_input__WEBPACK_IMPORTED_MODULE_5___default.a.Search;
       var searchStyle = {
         marginBottom: '20px',
@@ -1090,7 +1098,9 @@ function (_React$Component) {
               }
             }, "Delete"));
           }
-        })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_UserModal__WEBPACK_IMPORTED_MODULE_15__["default"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_UserModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          updateUser: this.updateUser
+        }));
       }
     }
   }]);
@@ -1100,13 +1110,19 @@ function (_React$Component) {
 
 var mapDispatchToProps = {
   getUsers: _store__WEBPACK_IMPORTED_MODULE_13__["getUsers"],
-  deleteUser: _store__WEBPACK_IMPORTED_MODULE_13__["deleteUser"]
+  deleteUser: _store__WEBPACK_IMPORTED_MODULE_13__["deleteUser"],
+  searchWord: _store__WEBPACK_IMPORTED_MODULE_13__["searchWord"],
+  searchUser: _store__WEBPACK_IMPORTED_MODULE_13__["searchUser"]
 };
 
 var mapStateToProps = function mapStateToProps(_ref3) {
-  var users = _ref3.users;
+  var users = _ref3.users,
+      searchword = _ref3.searchword,
+      searchusers = _ref3.searchusers;
   return {
-    users: users
+    users: users,
+    searchword: searchword,
+    searchusers: searchusers
   };
 };
 
@@ -1214,7 +1230,7 @@ function (_React$Component) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, deleteUser, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, searchWord, searchUser, deleteUser, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1230,6 +1246,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCoinPrice", function() { return getCoinPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUser", function() { return addUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchWord", function() { return searchWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchUser", function() { return searchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
@@ -1244,7 +1262,9 @@ var InitialState = {
   count: 0,
   partners: {},
   coins: {},
-  users: null
+  users: null,
+  searchword: "",
+  searchusers: null
 };
 var actionTypes = {
   TICK: 'TICK',
@@ -1254,6 +1274,8 @@ var actionTypes = {
   GETPARTNERS: 'GETPARTNERS',
   GETCOINPRICE: 'GETCOINPRICE',
   GETUSERS: 'GETUSERS',
+  SEARCHWORD: 'SEARCHWORD',
+  SEARCHUSER: 'SEARCHUSER',
   ADDUSER: 'ADDUSER',
   DELETEUSER: 'DELETEUSER' // REDUCERS
 
@@ -1302,6 +1324,18 @@ var reducer = function reducer() {
     case actionTypes.ADDUSER:
       return Object.assign({}, state, {
         users: state.users.concat(action.payload)
+      });
+
+    case actionTypes.SEARCHWORD:
+      return Object.assign({}, state, {
+        searchword: action.payload
+      });
+
+    case actionTypes.SEARCHUSER:
+      return Object.assign({}, state, {
+        searchusers: state.users.filter(function (user) {
+          return user.name.toLowerCase().indexOf(action.payload.toLowerCase()) > -1;
+        })
       });
 
     case actionTypes.DELETEUSER:
@@ -1366,6 +1400,18 @@ var getUsers = function getUsers(data) {
 var addUser = function addUser(data) {
   return {
     type: actionTypes.ADDUSER,
+    payload: data
+  };
+};
+var searchWord = function searchWord(data) {
+  return {
+    type: actionTypes.SEARCHWORD,
+    payload: data
+  };
+};
+var searchUser = function searchUser(data) {
+  return {
+    type: actionTypes.SEARCHUSER,
     payload: data
   };
 };

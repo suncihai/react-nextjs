@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { axiosClient } from '../common/js/axios'
 import { connect } from 'react-redux'
 import { Modal, Button, Form, Input, message, Spin } from 'antd'
-import { addUser } from '../store'
+import { addUser, searchUser } from '../store'
 
 class UserModal extends React.Component {
    state = {
@@ -40,11 +40,13 @@ class UserModal extends React.Component {
      if (ret.code === 0) {
         setTimeout(()=>{
           this.props.addUser(ret.data)
+          this.props.searchUser(this.props.searchword)
           this.setState({isShown: false, loading: false})
           message.success(`You Add ${params.name}!`)
         },800)
      } else if (ret.code === -2) {
         message.error(`${params.name} is already on the list!`)
+        this.setState({loading: false})
      }
   }
    
@@ -105,9 +107,11 @@ class UserModal extends React.Component {
    }
 }
 
-const mapDispatchToProps = { addUser }
+
+const mapDispatchToProps = { addUser,searchUser }
+const mapStateToProps = ({searchword}) => ({searchword})
 
 export default connect(
-   null,
+   mapStateToProps,
    mapDispatchToProps
  )(Form.create()(UserModal))
