@@ -849,8 +849,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _common_js_axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/js/axios */ "./common/js/axios.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_10__);
@@ -969,16 +969,16 @@ function (_React$Component) {
       }, _callee);
     })));
 
-    _defineProperty(_assertThisInitialized(_this), "searchUser", function (value) {
+    _defineProperty(_assertThisInitialized(_this), "searchUser", Object(lodash__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function (value) {
       var users = _this.props.users;
       users = users.filter(function (user) {
-        return user.name.indexOf(value) > -1;
+        return user.name.toLowerCase().indexOf(value.toLowerCase()) > -1;
       });
 
       _this.setState({
         users: users
       });
-    });
+    }, 250));
 
     _defineProperty(_assertThisInitialized(_this), "deleteUser",
     /*#__PURE__*/
@@ -1062,8 +1062,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(Search, {
           style: searchStyle,
           placeholder: "input search text",
-          onSearch: function onSearch(value) {
-            return _this2.searchUser(value);
+          onChange: function onChange(e) {
+            return _this2.searchUser(e.target.value);
           }
         })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(antd_lib_table__WEBPACK_IMPORTED_MODULE_1___default.a, {
           loading: loading,
@@ -1633,6 +1633,17 @@ module.exports = require("cookie");
 /***/ (function(module, exports) {
 
 module.exports = require("crypto-js/md5");
+
+/***/ }),
+
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
 
 /***/ }),
 

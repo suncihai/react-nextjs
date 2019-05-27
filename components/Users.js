@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { debounce } from 'lodash'
 import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
@@ -49,11 +49,11 @@ class Users extends React.Component {
       } 
    }
 
-   searchUser = (value) => {
+   searchUser = debounce((value) => {
       let users = this.props.users;
-      users = users.filter(user=>user.name.indexOf(value)>-1)
+      users = users.filter(user=>user.name.toLowerCase().indexOf(value.toLowerCase())>-1)
       this.setState({users: users})
-   }
+   },250)
 
    deleteUser = async (name) => {
       this.setState({loading: true})
@@ -89,7 +89,7 @@ class Users extends React.Component {
                <Search 
                   style={searchStyle}
                   placeholder="input search text"
-                  onSearch={value=>this.searchUser(value)}
+                  onChange={e=>this.searchUser(e.target.value)}
                />
             </div>
              <Table loading={loading} dataSource={users} rowKey={users => users.name}>
