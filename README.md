@@ -11,7 +11,7 @@ created a React-nextjs-redux framework with custom-server.
 * Layout
 1. use styled.component to define different components
 2. Antd Modal is tricky, hide footer button and customize own foot is better.
-3. Input onChange event, directly pass e.target.value instead of e, otherwise could not get target.value.
+3. Antd Input onChange event, directly pass e.target.value instead of e, otherwise could not get target.value.
 
 * Redux
 1. use _app.js under pages folder, set the reduxStore
