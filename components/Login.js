@@ -4,15 +4,17 @@ import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
 import { Button, Form, Input, message, Spin } from 'antd'
 import { MD5 } from 'crypto-js'
+import Router from 'next/router'
+import Cookies from 'js-cookie'
 
-const RegisterBody = styled.div`
+const LoginBody = styled.div`
    min-height: 93vh;
    padding-top: 200px;
    width: 400px;
    margin: 0 auto;
 `
 
-class Register extends React.Component {
+class Login extends React.Component {
    state = {
       loading: false,
    }
@@ -26,30 +28,37 @@ class Register extends React.Component {
                password: MD5(values.password).toString(),
             }
             this.setState({loading: true},()=>{
-               this.regsiter(params)
+               this.login(params)
             });
          }
       })
     };
 
-   regsiter = async (params) => {
+   login = async (params) => {
       const ret = await axiosClient({
         method: 'GET',
-        url: '/api/register',
+        url: '/api/login',
         params: params,
       })
 
      if (ret.code === 0) {
         setTimeout(()=>{
           this.setState({loading: false})
-          message.success(`You Add ${params.name}!`)
+          message.success(`Welcomse back ${params.username}!`)
+          Cookies.set('testUserName', params.username, {expires:1})
+          Router.replace('/user')
         },800)
-     } else {
+     } else if (ret.cde === -7){
          setTimeout(()=>{
-         message.error(`${params.username} is already registered!`)
+         message.error(`${params.username} is not found`)
          this.setState({loading: false})
          },800)
-     }
+     } else if (ret.cde === -8){
+         setTimeout(()=>{
+         message.error('Password is wrong!')
+         this.setState({loading: false})
+         },800)
+     } 
   }
    
    render() {
@@ -67,9 +76,9 @@ class Register extends React.Component {
       }
 
       return ( 
-         <RegisterBody>
+         <LoginBody>
             <Spin spinning={loading}>
-               <div style={ls}>Register</div>
+               <div style={ls}>Login</div>
                <Form onSubmit={(e)=>this.handleSubmit(e)}>
                   <Form.Item label="Name">
                      {getFieldDecorator('username', {
@@ -92,13 +101,13 @@ class Register extends React.Component {
                      })(<Input type="password"/>)}
                   </Form.Item>
                   <Form.Item>
-                     <Button style={bs} type="primary" onClick={(e)=>this.handleSubmit(e)}>Register</Button>
+                     <Button style={bs} type="primary" onClick={(e)=>this.handleSubmit(e)}>Login</Button>
                   </Form.Item>
                </Form>
             </Spin>
-         </RegisterBody>
+         </LoginBody>
       )
    }
 }
 
-export default Form.create()(Register)
+export default Form.create()(Login)

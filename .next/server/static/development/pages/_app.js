@@ -343,7 +343,7 @@ function (_App) {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, searchWord, searchUser, deleteUser, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, startClock, incrementCount, decrementCount, resetCount, getPartners, getCoinPrice, getUsers, addUser, searchWord, searchUser, deleteUser, login, logout, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -362,6 +362,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchWord", function() { return searchWord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchUser", function() { return searchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
@@ -377,7 +379,8 @@ var InitialState = {
   coins: {},
   users: null,
   searchword: "",
-  searchusers: null
+  searchusers: null,
+  user: null
 };
 var actionTypes = {
   TICK: 'TICK',
@@ -390,7 +393,9 @@ var actionTypes = {
   SEARCHWORD: 'SEARCHWORD',
   SEARCHUSER: 'SEARCHUSER',
   ADDUSER: 'ADDUSER',
-  DELETEUSER: 'DELETEUSER' // REDUCERS
+  DELETEUSER: 'DELETEUSER',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT' // REDUCERS
 
 };
 var reducer = function reducer() {
@@ -456,6 +461,16 @@ var reducer = function reducer() {
         users: state.users.filter(function (user) {
           return user.name != action.payload;
         })
+      });
+
+    case actionTypes.LOGIN:
+      return Object.assign({}, state, {
+        user: action.payload
+      });
+
+    case actionTypes.LOGOUT:
+      return Object.assign({}, state, {
+        user: null
       });
 
     default:
@@ -532,6 +547,17 @@ var deleteUser = function deleteUser(data) {
   return {
     type: actionTypes.DELETEUSER,
     payload: data
+  };
+};
+var login = function login(data) {
+  return {
+    type: actionTypes.LOGIN,
+    payload: data
+  };
+};
+var logout = function logout(data) {
+  return {
+    type: actionTypes.LOGOUT
   };
 };
 function initializeStore() {

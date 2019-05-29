@@ -48,9 +48,21 @@ const register = (req, res) => {
     .catch(errorResponse(req, res))
 }
 
+const login = (req, res) => {
+  axiosServer({
+      method: 'GET',
+      url: `http://localhost:8080/login`,
+      params: req.body,
+      headers: req.headers,
+    })
+    .then(responseWrap(req, res))
+    .catch(errorResponse(req, res))
+}
+
 module.exports = {
   getUsers,
   addUser,
   deleteUser,
-  register
+  register,
+  login
 }

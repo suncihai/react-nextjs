@@ -10,6 +10,7 @@ const InitialState = {
   users: null,
   searchword: "",
   searchusers: null,
+  user: null,
 }
 
 export const actionTypes = {
@@ -23,7 +24,9 @@ export const actionTypes = {
   SEARCHWORD: 'SEARCHWORD',
   SEARCHUSER: 'SEARCHUSER',
   ADDUSER: 'ADDUSER',
-  DELETEUSER: 'DELETEUSER'
+  DELETEUSER: 'DELETEUSER',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
 }
 
 // REDUCERS
@@ -73,6 +76,14 @@ export const reducer = (state = InitialState, action) => {
     case actionTypes.DELETEUSER:
       return Object.assign({}, state, {
         users: state.users.filter(user=>user.name!=action.payload)
+      })
+    case actionTypes.LOGIN:
+      return Object.assign({}, state, {
+        user: action.payload
+      })
+    case actionTypes.LOGOUT:
+      return Object.assign({}, state, {
+        user: null
       })
     default:
       return state
@@ -125,6 +136,14 @@ export const searchUser = (data) => {
 
 export const deleteUser = (data) => {
   return { type: actionTypes.DELETEUSER, payload: data }
+}
+
+export const login = (data) => {
+  return { type: actionTypes.LOGIN, payload: data }
+}
+
+export const logout = (data) => {
+  return { type: actionTypes.LOGOUT }
 }
 
 export function initializeStore (initialState = InitialState) {

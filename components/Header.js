@@ -2,7 +2,13 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import LogoImg from '../assets/img/logo.png'
 import LogoImg2 from '../assets/img/logo2.png'
+import CheckLogin from './CheckLogin'
+import { Divider } from 'antd'
+import { connect } from 'react-redux'
+import { logout } from '../store'
 import cx from 'classname'
+import Cookies from 'js-cookie'
+import Router from 'next/router'
 
 const Bar = styled.div`
    background: transparent;
@@ -39,37 +45,97 @@ const Logo = styled.img`
    cursor: pointer;
 `
 
-const naviList = ['Partners','User', 'Register']
+const LoginBoxUl = styled.ul`
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  li {
+     &:hover {
+        opacity: 0.7;
+     }
+  }
+`
 
-const Header = (props) => {
+const naviList = ['Partners','User']
 
-  const bgClass = cx({
-     'isDark': props.isDark,
-     'light': props.light,
-  })
+class Header extends React.Component {
 
-  return (
-   <div>
-      <Bar className={bgClass}>
-         <Link href={`/`}>
-            <Logo src={!props.light ? LogoImg : LogoImg2} />
-         </Link>
-         <ul style={{display:'inline-block',marginLeft: '30px'}}>
-         {
-            naviList.map((ele, index)=>{
-               return (
-                  <Navi key={index}>
-                     <Link href={`/${ele.toLowerCase()}`}>
-                     <span>{ele}</span>
-                  </Link>
-                  </Navi>
-               )
-            })
-         }
-         </ul>
-      </Bar>
-   </div>
-  )
+  logout() {
+     Cookies.remove('testUserName')
+     this.props.logout()
+     Router.replace('/partners')
+  }
+
+  render() {
+      const bgClass = cx({
+         'isDark': this.props.isDark,
+         'light': this.props.light,
+      })
+   
+      const ls = {
+         display: 'inline-block',
+         cursor: 'pointer'
+      }
+
+      let loginBox;
+      if(this.props.user) {
+         loginBox = <LoginBoxUl>
+                        <li style={ls}>
+                            <span>{this.props.user}</span>
+                        </li>
+                        <Divider type="vertical" />
+                        <li style={ls}>
+                           <span onClick={()=>this.logout()}>Log Out</span>
+                        </li>
+                     </LoginBoxUl>
+      } else {
+         loginBox = <LoginBoxUl>
+                        <li style={ls}>
+                           <Link href='/register'>
+                              <span>Register</span>
+                           </Link>
+                        </li>
+                        <Divider type="vertical" />
+                        <li style={ls}>
+                           <Link href='/login'>
+                              <span>Login</span>
+                           </Link>
+                        </li>
+                     </LoginBoxUl>
+      }
+
+      return (
+         <div>
+            <CheckLogin />
+            <Bar className={bgClass}>
+               <Link href={`/`}>
+                  <Logo src={!this.props.light ? LogoImg : LogoImg2} />
+               </Link>
+               <ul style={{display:'inline-block',marginLeft: '30px'}}>
+               {
+                  naviList.map((ele, index)=>{
+                     return (
+                        <Navi key={index}>
+                           <Link href={`/${ele.toLowerCase()}`}>
+                              <span>{ele}</span>
+                           </Link>
+                        </Navi>
+                     )
+                  })
+               }
+               </ul>
+               {loginBox}
+            </Bar>
+         </div>
+        )
+  }
+
 }
 
-export default Header;
+const mapDispatchToProps = { logout }
+const mapStateToProps = ({user}) => ({user})
+
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+ )(Header)
