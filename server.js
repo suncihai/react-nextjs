@@ -12,7 +12,7 @@ let port = 3000
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { getPartners } = require('./server/data.js')
-const { getUsers, addUser, deleteUser } = require('./server/user.js')
+const { getUsers, addUser, deleteUser, register } = require('./server/user.js')
 
 if (process.env.NODE_ENV === 'dev') {
   if (!process.env.LOCAL_API) {
@@ -125,6 +125,7 @@ if (process.env.NODE_ENV === 'dev') {
   server.get('/api/getusers', getUsers)
   server.get('/api/adduser', addUser)
   server.get('/api/deleteuser', deleteUser)
+  server.get('/api/register', register)
   
   server.get('*', (req, res) => {
     const parsedUrl = parse(req.url, true)

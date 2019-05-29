@@ -17,16 +17,16 @@ class UserModal extends React.Component {
 
    handleSubmit(e) {
       e.preventDefault();
-      this.setState({loading: true},()=>{
-         this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-              let params = {
-                 name: values.name,
-                 age: values.age,
-              }
-              this.addUser(params)
+      this.props.form.validateFieldsAndScroll((err, values) => {
+         if (!err) {
+            let params = {
+               name: values.name,
+               age: values.age,
             }
-          });
+            this.setState({loading: true},()=>{
+            this.addUser(params)
+            });
+         }
       })
     };
 

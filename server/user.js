@@ -37,8 +37,20 @@ const deleteUser = (req, res) => {
     .catch(errorResponse(req, res))
 }
 
+const register = (req, res) => {
+  axiosServer({
+      method: 'GET',
+      url: `http://localhost:8080/register`,
+      params: req.body,
+      headers: req.headers,
+    })
+    .then(responseWrap(req, res))
+    .catch(errorResponse(req, res))
+}
+
 module.exports = {
   getUsers,
   addUser,
-  deleteUser
+  deleteUser,
+  register
 }

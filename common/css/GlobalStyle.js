@@ -13,6 +13,18 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+  table {
+    th {
+      &:last-child {
+         text-align: right;
+      }
+    }
+    td {
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
   .tickGreen {
     -webkit-animation: GREEN-FADE 1s ;
     -moz-animation:    GREEN-FADE 1s ;
@@ -24,6 +36,9 @@ export const GlobalStyle = createGlobalStyle`
     -moz-animation:    RED-FADE 1s ;
     -o-animation:      RED-FADE 1s ;
     animation:         RED-FADE 1s ;
+  }
+  .ant-form-item-label {
+    text-align: left;
   }
   @-webkit-keyframes GREEN-FADE {
     0%   { background-color: #8bc34a; }

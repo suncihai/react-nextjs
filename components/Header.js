@@ -39,7 +39,7 @@ const Logo = styled.img`
    cursor: pointer;
 `
 
-const naviList = ['Partners','User']
+const naviList = ['Partners','User', 'Register']
 
 const Header = (props) => {
 

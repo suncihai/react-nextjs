@@ -27,6 +27,7 @@ const UserWrap = styled.div`
       width: 235px;
    }
 `
+
 class Users extends React.Component {
    state = {
       loading: false,
