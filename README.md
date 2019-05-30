@@ -17,7 +17,7 @@ created a React-nextjs-redux framework with custom-server.
 2. Antd Modal is tricky, hide footer button and customize own foot is better.
 3. Antd Input onChange event, directly pass e.target.value instead of e, otherwise could not    get target.value.
 4. switch statement in jsx
-5. import video need research
+5. import video need research...
 
 * Redux
 1. use _app.js under pages folder, set the reduxStore
