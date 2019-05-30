@@ -10,11 +10,13 @@ created a React-nextjs-redux framework with custom-server.
 
 * Config 
 1. Unhandled Rejection (TypeError): Cannot read property 'call' of undefined when clicking      Link https://github.com/zeit/next.js/issues/5636
+        https://github.com/zeit/next-plugins/issues/282
 
 * Layout
 1. use styled.component to define different components
 2. Antd Modal is tricky, hide footer button and customize own foot is better.
 3. Antd Input onChange event, directly pass e.target.value instead of e, otherwise could not    get target.value.
+4. switch statement in jsx
 
 * Redux
 1. use _app.js under pages folder, set the reduxStore

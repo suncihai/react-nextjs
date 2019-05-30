@@ -3,6 +3,8 @@ import Layout from '../components/Layout'
 import styled from 'styled-components'
 import Users from '../components/Users'
 
+import * as css from '../common/css/style.css'
+
 const Body = styled.div`
    background: #ebeef0;
 `
@@ -22,7 +24,7 @@ class UserPage extends React.Component {
       const { isDark, light } = this.state
  
       return (
-        <Layout isDark={isDark} light={light}>
+        <Layout isDark={isDark} light={light} className={css.sovleNextBug}>
           <Body>
             <Container className="banner-container">
               <Users />

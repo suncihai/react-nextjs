@@ -1,0 +1,25 @@
+@keyframes wordFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}   
+
+@keyframes wordFadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}      
+
+.wordfadeIn {
+    animation-duration: 3s;
+    backface-visibility:visible;
+    animation-name: wordFadeIn;
+    opacity:1;
+}
+
+.wordfadeOut {
+    animation-duration: 3s;
+    backface-visibility:visible;
+    animation-name:wordFadeOut;
+    opacity:0;
+    display: none;
+}  
+

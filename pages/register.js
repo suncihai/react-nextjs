@@ -3,11 +3,13 @@ import Layout from '../components/Layout'
 import styled from 'styled-components'
 import Register from '../components/Register'
 
-const Body = styled.div`
+import * as css from '../common/css/style.css'
+
+const ReBody = styled.div`
    background: #ebeef0;
 `
 
-const Container = styled.div`
+const ReContainer = styled.div`
     min-height: 97vh;
     background: #fff;
 `
@@ -22,12 +24,12 @@ class RegisterPage extends React.Component {
       const { isDark, light } = this.state
  
       return (
-        <Layout isDark={isDark} light={light}>
-          <Body>
-            <Container className="banner-container">
+        <Layout isDark={isDark} light={light} className={css.sovleNextBug}>
+          <ReBody>
+            <ReContainer className="banner-container">
               <Register />
-            </Container>
-          </Body>
+            </ReContainer>
+          </ReBody>
         </Layout>
       )
    }

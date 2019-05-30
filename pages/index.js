@@ -10,6 +10,8 @@ import banner5 from '../assets/img/banner5.jpg'
 import CoinList from '../components/CoinList'
 import Head from 'next/head'
 
+import * as css from '../common/css/style.css'
+
 
 import { Carousel } from 'antd';
 
@@ -82,7 +84,7 @@ class Index extends React.Component {
       }
  
       return (
-        <Layout isDark={isDark}>
+        <Layout isDark={isDark} className={css.sovleNextBug}>
           <Head>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
           </Head>

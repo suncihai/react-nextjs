@@ -20,11 +20,12 @@ const Bar = styled.div`
    padding-left: 10px;
    width: 100%;
    transition: ease 0.5s;
+   z-index:100;
    &.isDark {
       background: #0e1118;
    }
    &.light {
-      background: #fff;
+      background: transparent;
       color: #000;
    }
 `
@@ -56,14 +57,14 @@ const LoginBoxUl = styled.ul`
   }
 `
 
-const naviList = ['Partners','User']
+const naviList = ['Partners','User', 'About']
 
 class Header extends React.Component {
 
   logout() {
      Cookies.remove('testUserName')
      this.props.logout()
-     Router.replace('/partners')
+     Router.replace('/')
   }
 
   render() {

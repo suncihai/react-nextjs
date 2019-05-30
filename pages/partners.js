@@ -4,11 +4,13 @@ import Partners from '../components/Partners'
 import styled from 'styled-components'
 import bannerImg from '../assets/img/partners_bg.jpg'
 
-const Body = styled.div`
+import * as css from '../common/css/style.css'
+
+const PaBody = styled.div`
    background: #ebeef0;
 `
 
-const Container = styled.div`
+const PaContainer = styled.div`
     height: 600px;
     background:url(${bannerImg}) no-repeat 100% 100%;
     background-size: 1920px;
@@ -53,6 +55,10 @@ class PartnersPage extends React.Component {
     window.addEventListener('scroll', this.onScroll)
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
   onScroll = () => {
     if (window.scrollY > 250) {
        this.setState({isDark: true})
@@ -65,17 +71,17 @@ class PartnersPage extends React.Component {
       const { isDark } = this.state
  
       return (
-        <Layout isDark={isDark}>
-          <Body>
-            <Container className="banner-container">
+        <Layout isDark={isDark} className={css.sovleNextBug}>
+          <PaBody>
+            <PaContainer className="banner-container">
               <div className="title">
                   <h3>Our Partners</h3>
                   <p>BitMart aim to pioneer the world to a better financial system with fairness and equality. Since 2017, growing partners are joining and tightly working with BitMart for the remarkable human revolution. We believe, more efficiency, more fairness can fundamentally accelerate the word to a better place.</p>
                   <a href="https://www.wrike.com/frontend/requestforms/index.html?token=eyJhY2NvdW50SWQiOjE5MTAzNTgsInRhc2tGb3JtSWQiOjE5OTA1N30JNDcwNjAxOTM4ODQxMQk1NGM2NWI1MDA4MTc1YjEwMDAwYWQ0MzA4ZWIxY2E5MTBlNDFmMjg0YWNjZjc0ZmY3YzFhZWNhODc4ZWNmYjVl" target="_blank">Be Our Partner</a>
               </div>
-            </Container>
+            </PaContainer>
             <Partners />
-          </Body>
+          </PaBody>
         </Layout>
       )
    }

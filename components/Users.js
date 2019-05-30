@@ -7,6 +7,7 @@ import { getUsers, deleteUser, searchWord, searchUser } from '../store'
 import { Table, Button, message, Input } from 'antd'
 import Column from 'antd/lib/table/Column';
 import UserModal from '../components/UserModal'
+import Router from 'next/router'
 
 const UsersContainer = styled.div`
    width: 1000px;
@@ -34,6 +35,10 @@ class Users extends React.Component {
    }
 
    componentDidMount() {
+      if(!this.props.user) {
+         message.info('Please login first')
+         Router.replace('/login')
+      }
       this.getUsers()
    }
 
@@ -113,7 +118,7 @@ class Users extends React.Component {
 }
 
 const mapDispatchToProps = { getUsers, deleteUser, searchWord, searchUser }
-const mapStateToProps = ({users, searchword, searchusers}) => ({users, searchword, searchusers})
+const mapStateToProps = ({users, searchword, searchusers, user}) => ({users, searchword, searchusers, user})
 
 export default connect(
    mapStateToProps,

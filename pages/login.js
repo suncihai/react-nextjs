@@ -3,11 +3,13 @@ import Layout from '../components/Layout'
 import styled from 'styled-components'
 import Login from '../components/Login'
 
-const Body = styled.div`
+import * as css from '../common/css/style.css'
+
+const LoBody = styled.div`
    background: #ebeef0;
 `
 
-const Container = styled.div`
+const LoContainer = styled.div`
     min-height: 97vh;
     background: #fff;
 `
@@ -22,12 +24,12 @@ class LoginPage extends React.Component {
       const { isDark, light } = this.state
  
       return (
-        <Layout isDark={isDark} light={light}>
-          <Body>
-            <Container className="banner-container">
+        <Layout isDark={isDark} light={light} className={css.sovleNextBug}>
+          <LoBody>
+            <LoContainer className="banner-container">
               <Login />
-            </Container>
-          </Body>
+            </LoContainer>
+          </LoBody>
         </Layout>
       )
    }
