@@ -35489,7 +35489,7 @@ function initializeStore() {
 
 /***/ }),
 
-/***/ 22:
+/***/ 3:
 /*!*********************************!*\
   !*** multi ./pages/partners.js ***!
   \*********************************/
@@ -35514,5 +35514,5 @@ module.exports = dll_114c37924188cb7dc18b;
 
 /***/ })
 
-},[[22,"static/runtime/webpack.js","styles"]]]));;
+},[[3,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=partners.js.map

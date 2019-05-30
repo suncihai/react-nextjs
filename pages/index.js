@@ -59,6 +59,10 @@ class Index extends React.Component {
     window.addEventListener('scroll', this.onScroll)
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll',this.onScroll)
+  }
+
   onScroll = () => {
     if (window.scrollY > 250) {
        this.setState({isDark: true})
@@ -81,8 +85,6 @@ class Index extends React.Component {
         <Layout isDark={isDark}>
           <Head>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
-            <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-            <script src="/static/liquidFillGauge2.js" language="JavaScript"></script>
           </Head>
           <Body>
             <Container>

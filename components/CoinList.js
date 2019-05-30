@@ -66,70 +66,7 @@ class CoinList extends React.Component {
    }
 
    componentDidMount() {      
-      let gauge = []
-
-      var config1 = liquidFillGaugeDefaultSettings();
-      config1.waveAnimateTime = 5000;
-      config1.waveHeight = 0.08;
-      config1.waveOffset = 0.25;
-      config1.valueCountUp = false;
-      config1.displayPercent = false;
-      config1.textSize = 2;
-      config1.minValue = 0;
-      config1.maxValue = 10;
-      gauge[0] = loadLiquidFillGauge("fillgauge1", 0, config1);
-      var config2 = liquidFillGaugeDefaultSettings();
-      config2.waveAnimateTime = 5000;
-      config2.waveHeight = 0.08;
-      config2.waveOffset = 0.25;
-      config2.valueCountUp = false;
-      config2.displayPercent = false;
-      config2.textSize = 2;
-      config2.minValue = 0;
-      config2.maxValue = 10;
-      gauge[1] = loadLiquidFillGauge("fillgauge2", 0, config2);
-      var config3 = liquidFillGaugeDefaultSettings();
-      config3.waveAnimateTime = 5000;
-      config3.waveHeight = 0.08;
-      config3.waveOffset = 0.25;
-      config3.valueCountUp = false;
-      config3.displayPercent = false;
-      config3.textSize = 2;
-      config3.minValue = 0;
-      config3.maxValue = 10;
-      gauge[2] = loadLiquidFillGauge("fillgauge3", 0, config3);
-      var config4 = liquidFillGaugeDefaultSettings();
-      config4.waveAnimateTime = 5000;
-      config4.waveHeight = 0.08;
-      config4.waveOffset = 0.25;
-      config4.valueCountUp = false;
-      config4.displayPercent = false;
-      config4.textSize = 2;
-      config4.minValue = 0;
-      config4.maxValue = 10;
-      gauge[3] = loadLiquidFillGauge("fillgauge4", 0, config4);
-      var config5 = liquidFillGaugeDefaultSettings();
-      config5.waveAnimateTime = 5000;
-      config5.waveHeight = 0.08;
-      config5.waveOffset = 0.25;
-      config5.valueCountUp = false;
-      config5.displayPercent = false;
-      config5.textSize = 2;
-      config5.minValue = 0;
-      config5.maxValue = 10;
-      gauge[4] = loadLiquidFillGauge("fillgauge5", 0, config5);
-      var config6 = liquidFillGaugeDefaultSettings();
-      config6.waveAnimateTime = 5000;
-      config6.waveHeight = 0.08;
-      config6.waveOffset = 0.25;
-      config6.valueCountUp = false;
-      config6.displayPercent = false;
-      config6.textSize = 2;
-      config6.minValue = 0;
-      config6.maxValue = 10;
-      gauge[5] = loadLiquidFillGauge("fillgauge6", 0, config6);
-
-      this.getCoinList(gauge);
+      this.getCoinList();
     }
 
    componentWillUnmount() {
@@ -139,7 +76,7 @@ class CoinList extends React.Component {
       }
    }
   
-    getCoinList = async (gauge) => {
+    getCoinList = async () => {
       const ret = await axios.get(`${cryptoApiUrl}/data/top/totalvolfull?limit=100&tsym=USD`)
       const coins = ret.data.Data
 
@@ -166,10 +103,10 @@ class CoinList extends React.Component {
       })
   
       this.props.getCoinPrice(coinsParsed)
-      this.subscribeStream(Object.keys(coinsParsed), coinsParsed, gauge)
+      this.subscribeStream(Object.keys(coinsParsed), coinsParsed)
     }
   
-    subscribeStream(symbols, coins, gauge) {
+    subscribeStream(symbols, coins) {
       /*
         Subscribe to websocket stream using coin symbols.
       */
@@ -183,11 +120,11 @@ class CoinList extends React.Component {
       this.socket.emit('SubAdd', {'subs': subscriptions})
   
       this.socket.on('m', message => {
-        this.handleMessage(message, coins, gauge)
+        this.handleMessage(message, coins)
       })
     }
   
-    handleMessage(message, coins, gauge) {
+    handleMessage(message, coins) {
       //console.log('coins', this.props.coins)
   
       message = message.split('~')
@@ -209,11 +146,11 @@ class CoinList extends React.Component {
           coin.isDown = true
         }
   
-        this.updateCoin(coin, coins, gauge)
+        this.updateCoin(coin, coins)
       }
     }
   
-    updateCoin(coin, coins, gauge) {
+    updateCoin(coin, coins) {
       const { status } = this.state
       this.setState({status:!status})
       coins[coin.name] = coin
@@ -223,13 +160,6 @@ class CoinList extends React.Component {
          if(ele.name=="BTC"){
             let num = `${parseFloat(ele.price).toFixed(2)}`
             num = num.split('.')
-
-            gauge[0].update(parseInt(num[0][0]))
-            gauge[1].update(parseInt(num[0][1]))
-            gauge[2].update(parseInt(num[0][2]))
-            gauge[3].update(parseInt(num[0][3]))
-            gauge[4].update(parseInt(num[1][0]))
-            gauge[5].update(parseInt(num[1][1]))
 
             let arr = this.state.btcData
             arr.push(parseFloat(ele.price).toFixed(2))
@@ -270,15 +200,6 @@ class CoinList extends React.Component {
                  <div className="max">${_.max(this.state.btcData)}</div>
                  <div className="min">${_.min(this.state.btcData)}</div>
                </div>
-               <CoinGraphContainer>
-                  <span>BTC</span>
-                  <svg id="fillgauge1" width="70" height="70"></svg>
-                  <svg id="fillgauge2" width="70" height="70"></svg>
-                  <svg id="fillgauge3" width="70" height="70"></svg>
-                  <svg id="fillgauge4" width="70" height="70"></svg>
-                  <svg id="fillgauge5" width="70" height="70"></svg>
-                  <svg id="fillgauge6" width="70" height="70"></svg>
-               </CoinGraphContainer>
                { Object.values(this.props.coins).map(ele =>
                   <CoinWrap key={ele.name} className={cx({'tickGreen':ele.isUp,'tickRed':ele.isDown})}>
                      <div>{ele.name}</div>

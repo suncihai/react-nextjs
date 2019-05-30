@@ -8,10 +8,13 @@ created a React-nextjs-redux framework with custom-server.
 3. integrated nextjs with antd, use next/css to make antd work
 4. axiosServer make api calls to server, axiosClient is client inner request
 
+* Config 
+1. Unhandled Rejection (TypeError): Cannot read property 'call' of undefined when clicking      Link https://github.com/zeit/next.js/issues/5636
+
 * Layout
 1. use styled.component to define different components
 2. Antd Modal is tricky, hide footer button and customize own foot is better.
-3. Antd Input onChange event, directly pass e.target.value instead of e, otherwise could not get target.value.
+3. Antd Input onChange event, directly pass e.target.value instead of e, otherwise could not    get target.value.
 
 * Redux
 1. use _app.js under pages folder, set the reduxStore
