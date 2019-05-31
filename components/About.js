@@ -6,6 +6,7 @@ import { Button, Form, Input, message, Spin } from 'antd'
 import video1 from '../assets/video/1.mp4'
 import video2 from '../assets/video/2.mp4'
 import video3 from '../assets/video/3.mp4'
+import video4 from '../assets/video/4.mp4'
 import ReactPlayer from 'react-player'
 import cx from 'classname'
 import '../common/css/animation.css'
@@ -37,6 +38,7 @@ const StoryWrapper = styled.div`
    top:50%;
    font-size:40px;
    color: #fff;
+   white-space: nowrap;
 `
 
 const Mask = styled.div`
@@ -45,7 +47,7 @@ const Mask = styled.div`
   height: 600px;
   left: 0;
   top: 0;
-  z-index:999;
+  z-index:50;
   background: #000;
 `
 
@@ -79,6 +81,13 @@ const About = () => {
             },1000)
          }
          if(story == 5) {
+            setMask(mask => true)
+            setTimeout(()=>{
+               setMask(mask => false)
+               setVideo(video4)
+            },1000)
+         }
+         if(story == 7) {
             setMask(mask => true)
             setTimeout(()=>{
                setMask(mask => false)
@@ -119,10 +128,12 @@ const About = () => {
                <>
                   <div className={story == 0 ? 'wordfadeIn' : 'wordfadeOut'}>We are eager to discover unknown area</div>
                   <div className={story == 1 ? 'wordfadeIn' : 'wordfadeOut'}>No one is fear</div>
-                  <div className={story == 2 ? 'wordfadeIn' : 'wordfadeOut'}>Nothing is impossible</div>
+                  <div className={story == 2 ? 'wordfadeIn' : 'wordfadeOut'}>One good change to Buy BitCoin</div>
                   <div className={story == 3 ? 'wordfadeIn' : 'wordfadeOut'}>Just do it.</div>
                   <div className={story == 4 ? 'wordfadeIn' : 'wordfadeOut'}>Keep walking</div>
                   <div className={story == 5 ? 'wordfadeIn' : 'wordfadeOut'}>And you are there</div>
+                  <div className={story == 6 ? 'wordfadeIn' : 'wordfadeOut'}>If you love your dog</div>
+                  <div className={story == 7 ? 'wordfadeIn' : 'wordfadeOut'}>let him 财务自由</div>
                </>
             </StoryWrapper>
          </VideoWrapper>

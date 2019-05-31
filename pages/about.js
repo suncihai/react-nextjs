@@ -17,7 +17,7 @@ const Container = styled.div`
 class AboutPage extends React.Component {
   state = {
     isDark : false,
-    light: true,
+    light: false,
   }
 
    render(){

@@ -55,6 +55,17 @@ module.exports = "/_next/static/files/3_addc48145d0709421e92e37160a7c816.mp4";
 
 /***/ }),
 
+/***/ "./assets/video/4.mp4":
+/*!****************************!*\
+  !*** ./assets/video/4.mp4 ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/_next/static/files/4_2d5093b375ccd463ef567d4b500dcab0.mp4";
+
+/***/ }),
+
 /***/ "./components/About.js":
 /*!*****************************!*\
   !*** ./components/About.js ***!
@@ -73,12 +84,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_video_2_mp4__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_video_2_mp4__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _assets_video_3_mp4__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/video/3.mp4 */ "./assets/video/3.mp4");
 /* harmony import */ var _assets_video_3_mp4__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_video_3_mp4__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-player */ "./node_modules/react-player/lib/ReactPlayer.js");
-/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_player__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classname */ "./node_modules/classname/classname.js");
-/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classname__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _common_css_animation_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/css/animation.css */ "./common/css/animation.css");
-/* harmony import */ var _common_css_animation_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_common_css_animation_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _assets_video_4_mp4__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/video/4.mp4 */ "./assets/video/4.mp4");
+/* harmony import */ var _assets_video_4_mp4__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_video_4_mp4__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-player */ "./node_modules/react-player/lib/ReactPlayer.js");
+/* harmony import */ var react_player__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_player__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classname */ "./node_modules/classname/classname.js");
+/* harmony import */ var classname__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classname__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _common_css_animation_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/css/animation.css */ "./common/css/animation.css");
+/* harmony import */ var _common_css_animation_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_common_css_animation_css__WEBPACK_IMPORTED_MODULE_8__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -86,6 +99,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -107,11 +121,11 @@ var VideoWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div
 var StoryWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
   displayName: "About__StoryWrapper",
   componentId: "npphg5-2"
-})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;"]);
+})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;white-space:nowrap;"]);
 var Mask = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
   displayName: "About__Mask",
   componentId: "npphg5-3"
-})(["position:absolute;width:100%;height:600px;left:0;top:0;z-index:999;background:#000;"]);
+})(["position:absolute;width:100%;height:600px;left:0;top:0;z-index:50;background:#000;"]);
 
 var About = function About() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
@@ -170,6 +184,18 @@ var About = function About() {
           setMask(function (mask) {
             return false;
           });
+          setVideo(_assets_video_4_mp4__WEBPACK_IMPORTED_MODULE_5___default.a);
+        }, 1000);
+      }
+
+      if (story == 7) {
+        setMask(function (mask) {
+          return true;
+        });
+        setTimeout(function () {
+          setMask(function (mask) {
+            return false;
+          });
           setVideo(_assets_video_1_mp4__WEBPACK_IMPORTED_MODULE_2___default.a);
         }, 1000);
         return 0;
@@ -185,7 +211,7 @@ var About = function About() {
       clearTimeout(timer);
     };
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginBody, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoWrapper, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_player__WEBPACK_IMPORTED_MODULE_5___default.a, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginBody, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoWrapper, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_player__WEBPACK_IMPORTED_MODULE_6___default.a, {
     url: video,
     playing: true,
     loop: true,
@@ -199,13 +225,17 @@ var About = function About() {
     className: story == 1 ? 'wordfadeIn' : 'wordfadeOut'
   }, "No one is fear"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 2 ? 'wordfadeIn' : 'wordfadeOut'
-  }, "Nothing is impossible"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "One good change to Buy BitCoin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 3 ? 'wordfadeIn' : 'wordfadeOut'
   }, "Just do it."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 4 ? 'wordfadeIn' : 'wordfadeOut'
   }, "Keep walking"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 5 ? 'wordfadeIn' : 'wordfadeOut'
-  }, "And you are there")))));
+  }, "And you are there"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: story == 6 ? 'wordfadeIn' : 'wordfadeOut'
+  }, "If you love your dog"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: story == 7 ? 'wordfadeIn' : 'wordfadeOut'
+  }, "let him \u8D22\u52A1\u81EA\u7531")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (About);
@@ -21332,7 +21362,7 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       isDark: false,
-      light: true
+      light: false
     });
 
     return _this;
