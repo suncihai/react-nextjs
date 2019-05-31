@@ -23,3 +23,16 @@
     display: none;
 }  
 
+.maskFadeIn {
+  animation-duration: 1s;
+  backface-visibility:visible;
+  animation-name: wordFadeIn;
+  opacity:1;
+}
+
+.maskFadeOut {
+  animation-duration: 1s;
+  backface-visibility:visible;
+  animation-name:wordFadeOut;
+  opacity:0;
+}

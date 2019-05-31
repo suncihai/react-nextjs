@@ -107,7 +107,11 @@ var VideoWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div
 var StoryWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
   displayName: "About__StoryWrapper",
   componentId: "npphg5-2"
-})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;cursor:pointer;"]);
+})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;"]);
+var Mask = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
+  displayName: "About__Mask",
+  componentId: "npphg5-3"
+})(["position:absolute;width:100%;height:600px;left:0;top:0;z-index:999;background:#000;"]);
 
 var About = function About() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
@@ -120,22 +124,66 @@ var About = function About() {
       video = _useState4[0],
       setVideo = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      mask = _useState6[0],
+      setMask = _useState6[1];
+
+  var timer = function timer() {
+    setTimeout(function () {
+      addStory(story);
+      timer();
+    }, 5000);
+  };
+
   var addStory = function addStory(story) {
     setStory(function (story) {
+      if (story == 1) {
+        setMask(function (mask) {
+          return true;
+        });
+        setTimeout(function () {
+          setMask(function (mask) {
+            return false;
+          });
+          setVideo(_assets_video_2_mp4__WEBPACK_IMPORTED_MODULE_3___default.a);
+        }, 1000);
+      }
+
+      if (story == 3) {
+        setMask(function (mask) {
+          return true;
+        });
+        setTimeout(function () {
+          setMask(function (mask) {
+            return false;
+          });
+          setVideo(_assets_video_3_mp4__WEBPACK_IMPORTED_MODULE_4___default.a);
+        }, 1000);
+      }
+
+      if (story == 5) {
+        setMask(function (mask) {
+          return true;
+        });
+        setTimeout(function () {
+          setMask(function (mask) {
+            return false;
+          });
+          setVideo(_assets_video_1_mp4__WEBPACK_IMPORTED_MODULE_2___default.a);
+        }, 1000);
+        return 0;
+      }
+
       return story + 1;
     });
-
-    if (story == 1) {
-      setVideo(_assets_video_2_mp4__WEBPACK_IMPORTED_MODULE_3___default.a);
-    }
-
-    if (story == 3) {
-      setVideo(_assets_video_3_mp4__WEBPACK_IMPORTED_MODULE_4___default.a);
-    }
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    return function () {};
+    timer();
+    return function () {
+      clearTimeout(timer);
+    };
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginBody, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoWrapper, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_player__WEBPACK_IMPORTED_MODULE_5___default.a, {
     url: video,
@@ -143,11 +191,9 @@ var About = function About() {
     loop: true,
     width: "100%",
     height: "600px"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StoryWrapper, {
-    onClick: function onClick() {
-      return addStory(story);
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Mask, {
+    className: mask ? 'maskFadeIn' : 'maskFadeOut'
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StoryWrapper, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 0 ? 'wordfadeIn' : 'wordfadeOut'
   }, "We are eager to discover unknown area"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 1 ? 'wordfadeIn' : 'wordfadeOut'
@@ -159,7 +205,7 @@ var About = function About() {
     className: story == 4 ? 'wordfadeIn' : 'wordfadeOut'
   }, "Keep walking"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: story == 5 ? 'wordfadeIn' : 'wordfadeOut'
-  }, "And you are there"))));
+  }, "And you are there")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (About);

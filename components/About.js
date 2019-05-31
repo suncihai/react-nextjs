@@ -37,28 +37,64 @@ const StoryWrapper = styled.div`
    top:50%;
    font-size:40px;
    color: #fff;
-   cursor: pointer;
+`
+
+const Mask = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  left: 0;
+  top: 0;
+  z-index:999;
+  background: #000;
 `
 
 
 const About = () => {
    const [ story, setStory ] = useState(0);
    const [ video, setVideo ] = useState(video1);
+   const [ mask, setMask] = useState(false);
+
+   const timer = () => {
+      setTimeout(()=>{
+         addStory(story)
+         timer()
+      },5000)
+   }
 
    const addStory = (story) => {
-      setStory(story => story + 1)
-      if(story == 1) {
-         setVideo(video2)
-      }
-      if(story == 3) {
-         setVideo(video3)
-      }
+      setStory(story => {
+         if(story == 1) {
+            setMask(mask => true)
+            setTimeout(()=>{
+               setMask(mask => false)
+               setVideo(video2)
+            },1000)
+         }
+         if(story == 3) {
+            setMask(mask => true)
+            setTimeout(()=>{
+               setMask(mask => false)
+               setVideo(video3)
+            },1000)
+         }
+         if(story == 5) {
+            setMask(mask => true)
+            setTimeout(()=>{
+               setMask(mask => false)
+               setVideo(video1)
+            },1000)
+            return 0
+         }
+
+         return story + 1
+      })
    }
     
    useEffect(() => {
-
+      timer()
       return () => {
-
+         clearTimeout(timer)
       }
    },[])
 
@@ -67,7 +103,9 @@ const About = () => {
       <LoginBody>
          <VideoWrapper>
             <ReactPlayer url={video} playing loop width="100%" height="600px"/>
-            <StoryWrapper onClick={()=>addStory(story)}>
+            <Mask className={mask?'maskFadeIn':'maskFadeOut'}/>
+            <StoryWrapper>
+               {/* use switch cannot trigger word fade animation here */}
                {/* {(()=>{
                  switch(story) {
                     case 0:
@@ -78,12 +116,14 @@ const About = () => {
                        return <></>
                  }
                })()} */}
-               <div className={story == 0 ? 'wordfadeIn' : 'wordfadeOut'}>We are eager to discover unknown area</div>
-               <div className={story == 1 ? 'wordfadeIn' : 'wordfadeOut'}>No one is fear</div>
-               <div className={story == 2 ? 'wordfadeIn' : 'wordfadeOut'}>Nothing is impossible</div>
-               <div className={story == 3 ? 'wordfadeIn' : 'wordfadeOut'}>Just do it.</div>
-               <div className={story == 4 ? 'wordfadeIn' : 'wordfadeOut'}>Keep walking</div>
-               <div className={story == 5 ? 'wordfadeIn' : 'wordfadeOut'}>And you are there</div>
+               <>
+                  <div className={story == 0 ? 'wordfadeIn' : 'wordfadeOut'}>We are eager to discover unknown area</div>
+                  <div className={story == 1 ? 'wordfadeIn' : 'wordfadeOut'}>No one is fear</div>
+                  <div className={story == 2 ? 'wordfadeIn' : 'wordfadeOut'}>Nothing is impossible</div>
+                  <div className={story == 3 ? 'wordfadeIn' : 'wordfadeOut'}>Just do it.</div>
+                  <div className={story == 4 ? 'wordfadeIn' : 'wordfadeOut'}>Keep walking</div>
+                  <div className={story == 5 ? 'wordfadeIn' : 'wordfadeOut'}>And you are there</div>
+               </>
             </StoryWrapper>
          </VideoWrapper>
       </LoginBody>
