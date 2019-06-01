@@ -32,8 +32,6 @@ class AboutPage extends React.Component {
     const height = window.scrollY
     const windowHeight = window.innerHeight
 
-    console.log('test222')
-
     if ( height >= 2 * windowHeight) {
        this.setState({light: false})
     } else {

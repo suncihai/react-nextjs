@@ -292,7 +292,7 @@ var Mask = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withCon
 var SideBar = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__SideBar",
   componentId: "sc-1xephd0-5"
-})(["position:fixed;left:0;top:12.5vh;width:175px;height:75vh;z-index:70;ul{display:flex;height:100%;flex-direction:column;justify-content:space-between;li{align-items:center;display:flex;height:8vh;color:#ddd;padding:30px;cursor:pointer;&.active{color:#000;border-left:5px solid #000;}}}"]);
+})(["position:fixed;left:0;top:12.5vh;width:175px;height:75vh;z-index:70;ul{display:flex;height:100%;flex-direction:column;justify-content:space-between;li{align-items:center;display:flex;height:8vh;color:#ddd;padding:30px;cursor:pointer;&.active{color:#000;border-left:5px solid #000;&.light{color:#fff;border-left:5px solid #fff;}}&.light{color:#aaa;}}}"]);
 
 var About = function About() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0),
@@ -315,10 +315,15 @@ var About = function About() {
       bars = _useState8[0],
       setBars = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      app1 = _useState10[0],
-      setApp1 = _useState10[1];
+      light = _useState10[0],
+      setLight = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      app1 = _useState12[0],
+      setApp1 = _useState12[1];
 
   var timer = function timer() {
     setTimeout(function () {
@@ -373,7 +378,8 @@ var About = function About() {
     });
   };
 
-  var selectBar = function selectBar(bars, num) {
+  var selectBar = function selectBar(bars, num, light) {
+    var windowHeight = window.innerHeight;
     bars.map(function (ele, index) {
       if (num == index) {
         ele.active = true;
@@ -384,6 +390,11 @@ var About = function About() {
     setBars(function (bars) {
       return bars;
     });
+    setLight(light);
+    window.scrollTo({
+      top: num * windowHeight,
+      behavior: 'smooth'
+    });
   };
 
   var onScroll = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["debounce"])(function () {
@@ -391,23 +402,11 @@ var About = function About() {
     var windowHeight = window.innerHeight;
 
     if (height < windowHeight / 2) {
-      selectBar(bars, 0);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      selectBar(bars, 0, false);
     } else if (height >= windowHeight / 2 && height < 1.5 * windowHeight) {
-      selectBar(bars, 1);
-      window.scrollTo({
-        top: windowHeight,
-        behavior: 'smooth'
-      });
+      selectBar(bars, 1, false);
     } else if (height >= 1.5 * windowHeight && height < 2.5 * windowHeight) {
-      selectBar(bars, 2);
-      window.scrollTo({
-        top: 2 * windowHeight,
-        behavior: 'smooth'
-      });
+      selectBar(bars, 2, true);
     }
   }, 350);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
@@ -424,7 +423,10 @@ var About = function About() {
       onClick: function onClick() {
         return selectBar(bars, index);
       },
-      className: ele.active ? 'active' : '',
+      className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+        'active': ele.active,
+        'light': light
+      }),
       key: index
     }, ele.bar);
   }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ContentWrap, {
@@ -46942,7 +46944,6 @@ function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "onScroll", function () {
       var height = window.scrollY;
       var windowHeight = window.innerHeight;
-      console.log('test222');
 
       if (height >= 2 * windowHeight) {
         _this.setState({
@@ -47237,7 +47238,7 @@ function initializeStore() {
 
 /***/ }),
 
-/***/ 10:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/about.js ***!
   \******************************/
@@ -47262,5 +47263,5 @@ module.exports = dll_114c37924188cb7dc18b;
 
 /***/ })
 
-},[[10,"static/runtime/webpack.js","styles"]]]));;
+},[[3,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=about.js.map

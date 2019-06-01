@@ -149,6 +149,13 @@ const SideBar = styled.div`
         &.active {
            color: #000;
            border-left: 5px solid #000;
+           &.light {
+              color: #fff;
+              border-left: 5px solid #fff;
+           }
+        }
+        &.light {
+           color: #aaa;
         }
      }
   }
@@ -160,6 +167,7 @@ const About = () => {
    const [ video, setVideo ] = useState(video1);
    const [ mask, setMask] = useState(false);
    const [ bars, setBars] = useState(sidebarMenu);
+   const [ light, setLight ] = useState(false);
    const [ app1, setApp1] = useState(0);
 
    const timer = () => {
@@ -207,7 +215,9 @@ const About = () => {
       })
    }
 
-   const selectBar = (bars, num) => {
+   const selectBar = (bars, num, light) => {
+     const windowHeight = window.innerHeight
+
      bars.map((ele, index)=>{
         if(num==index) {
            ele.active = true
@@ -216,6 +226,11 @@ const About = () => {
         }
      })
      setBars(bars => bars)
+     setLight(light)
+     window.scrollTo({
+       top: num * windowHeight,
+       behavior: 'smooth'
+     })
    }
 
    const onScroll = debounce(() => {
@@ -223,23 +238,11 @@ const About = () => {
       const windowHeight = window.innerHeight
      
      if(height<windowHeight/2) {
-        selectBar(bars, 0)
-        window.scrollTo({
-           top: 0,
-           behavior: 'smooth'
-        })
+        selectBar(bars, 0, false)
      }else if(height>=windowHeight/2&&height<1.5*windowHeight){
-        selectBar(bars, 1)
-         window.scrollTo({
-            top: windowHeight,
-            behavior: 'smooth'
-         })
+        selectBar(bars, 1, false)
      }else if(height>=1.5*windowHeight&&height<2.5*windowHeight){
-        selectBar(bars, 2)
-         window.scrollTo({
-            top: 2*windowHeight,
-            behavior: 'smooth'
-         })
+        selectBar(bars, 2, true)
      }
    },350)
     
@@ -262,7 +265,7 @@ const About = () => {
             {
                bars.map((ele, index)=>{
                   return (
-                     <li onClick={()=>selectBar(bars, index)} className={ele.active ? 'active' : ''} key={index}>{ele.bar}</li>
+                     <li onClick={()=>selectBar(bars, index)} className={cx({'active':ele.active,'light':light})} key={index}>{ele.bar}</li>
                   )
                })
             }
