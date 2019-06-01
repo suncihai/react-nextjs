@@ -1,12 +1,12 @@
 import { debounce } from 'lodash'
-import { axiosClient } from '../common/js/axios'
+import { axiosClient } from '../../common/js/axios'
 import styled from 'styled-components'
-import Loading from '../components/Loading'
+import Loading from '../../components/layout/Loading'
 import { connect } from 'react-redux'
-import { getUsers, deleteUser, searchWord, searchUser } from '../store'
+import { getUsers, deleteUser, searchWord, searchUser } from '../../store'
 import { Table, Button, message, Input } from 'antd'
 import Column from 'antd/lib/table/Column';
-import UserModal from '../components/UserModal'
+import UserModal from './UserModal'
 import Router from 'next/router'
 
 const UsersContainer = styled.div`

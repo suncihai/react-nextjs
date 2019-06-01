@@ -6,7 +6,35 @@
 @keyframes wordFadeOut {
   0%   { opacity: 1; }
   100% { opacity: 0; }
-}      
+}
+
+@keyframes maskFadeIn {
+  0%   { opacity: 0.4; }
+  100% { opacity: 1; }
+}   
+
+@keyframes maskFadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0.4; }
+}   
+
+@keyframes riseDown {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: 10px;
+  }
+  50% {
+    top: 15px;
+  }
+  75% {
+    top: 12px;
+  }
+  100% {
+    top: 0;
+  }
+}
 
 .wordfadeIn {
     animation-duration: 3s;
@@ -26,13 +54,37 @@
 .maskFadeIn {
   animation-duration: 1s;
   backface-visibility:visible;
-  animation-name: wordFadeIn;
+  animation-name: maskFadeIn;
   opacity:1;
 }
 
 .maskFadeOut {
   animation-duration: 1s;
   backface-visibility:visible;
+  animation-name:maskFadeOut;
+  opacity:0.4;
+}
+
+.appFadeIn {
+  animation-duration: 0.8s;
+  backface-visibility:visible;
+  animation-name: wordFadeIn;
+  opacity:1;
+}
+
+.appFadeOut {
+  animation-duration: 0.8s;
+  backface-visibility:visible;
   animation-name:wordFadeOut;
   opacity:0;
+  display: none;
+} 
+
+.riseDown {
+  animation-duration: 4s;
+  animation-name:riseDown;
+  animation-iteration-count:infinite;
+  transform-origin:0 81px;
+  animation-timing-function:ease-in-out;
 }
+

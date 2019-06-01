@@ -25,6 +25,9 @@ created a React-nextjs-redux framework with custom-server.
 3. connect mapStateToProps and mapDispatchToProps with Components
 4. workflow is action -> reducers -> state updated -> view
 
+* Hook
+1. See About.js 
+
 * WebSocket
 1. set up a new socket to get data
 2. while route changes, remember to close socket to prevent memory leak

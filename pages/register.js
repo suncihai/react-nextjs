@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '../components/layout/Layout'
 import styled from 'styled-components'
-import Register from '../components/Register'
+import Register from '../components/register/Register'
 
 import * as css from '../common/css/style.css'
 

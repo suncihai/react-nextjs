@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login } from '../store'
+import { login } from '../../store'
 import Cookies from 'js-cookie'
 
 class CheckLogin extends React.Component {

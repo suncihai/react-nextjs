@@ -27,7 +27,7 @@ module.exports = withCss(withLess({
         rules: [
           ...(module.rules || []),
           {
-            test: /\.(png|woff|woff2|eot|ttf|gif|jpg|ico|svg|mp4)$/,
+            test: /\.(png|woff|woff2|eot|ttf|gif|jpg|ico|otf|svg|mp4)$/,
             loader: 'file-loader',
             options: {
               name: '[name]_[hash].[ext]',

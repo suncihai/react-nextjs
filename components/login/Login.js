@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { axiosClient } from '../common/js/axios'
+import { axiosClient } from '../../common/js/axios'
 import styled from 'styled-components'
 import { Button, Form, Input, message, Spin } from 'antd'
 import { MD5 } from 'crypto-js'

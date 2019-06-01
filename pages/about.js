@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '../components/layout/Layout'
 import styled from 'styled-components'
-import About from '../components/About'
+import About from '../components/about/About'
 
 import * as css from '../common/css/style.css'
 
@@ -17,7 +17,28 @@ const Container = styled.div`
 class AboutPage extends React.Component {
   state = {
     isDark : false,
-    light: false,
+    light: true,
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = () => {
+    const height = window.scrollY
+    const windowHeight = window.innerHeight
+
+    console.log('test222')
+
+    if ( height >= 2 * windowHeight) {
+       this.setState({light: false})
+    } else {
+       this.setState({light: true})
+    }
   }
 
    render(){

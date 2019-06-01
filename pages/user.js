@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '../components/layout/Layout'
 import styled from 'styled-components'
-import Users from '../components/Users'
+import Users from '../components/user/Users'
 
 import * as css from '../common/css/style.css'
 

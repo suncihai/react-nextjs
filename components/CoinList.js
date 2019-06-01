@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React from 'react'
 import { axiosClient } from '../common/js/axios'
 import styled from 'styled-components'
-import Loading from '../components/Loading'
+import Loading from '../components/layout/Loading'
 import { connect } from 'react-redux'
 import { cryptoApiUrl, cryptoStreamUrl } from '../common/js/const'
 import { getCoinPrice } from '../store'

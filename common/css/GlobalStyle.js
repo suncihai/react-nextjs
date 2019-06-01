@@ -25,6 +25,16 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+  @font-face {
+    font-display: auto;
+    font-family: 'DIN-Regular';
+    src: url('../../assets/iconfont/DIN/DIN-Regular.otf');
+  }
+  @font-face {
+    font-display: auto;
+    font-family: 'DIN-Bold';
+    src: url('../../assets/iconfont/DIN/DIN-Bold.otf');
+  }
   .tickGreen {
     -webkit-animation: GREEN-FADE 1s ;
     -moz-animation:    GREEN-FADE 1s ;

@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '../components/layout/Layout'
 import styled from 'styled-components'
 import bannerBg from '../assets/img/home_bg.jpg'
 import banner1 from '../assets/img/banner1.jpg'

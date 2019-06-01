@@ -1,12 +1,9 @@
-import axios from 'axios';
-import { axiosClient } from '../common/js/axios'
+import { axiosClient } from '../../common/js/axios'
 import styled from 'styled-components'
-import Loading from '../components/Loading'
+import Loading from '../../components/layout/Loading'
 import { connect } from 'react-redux'
-import { startClock, serverRenderClock, getPartners } from '../store'
-import Examples from '../components/example'
-import { websocketSub } from '../common/js/rx-websocket'
-import { CoinList } from '../common/js/const'
+import { startClock, serverRenderClock, getPartners } from '../../store'
+import { websocketSub } from '../../common/js/rx-websocket'
 
 const PartnerContainer = styled.div`
    width: 1000px;

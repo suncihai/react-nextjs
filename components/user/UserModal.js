@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
-import { axiosClient } from '../common/js/axios'
+import { axiosClient } from '../../common/js/axios'
 import { connect } from 'react-redux'
 import { Modal, Button, Form, Input, message, Spin } from 'antd'
-import { addUser, searchUser } from '../store'
+import { addUser, searchUser } from '../../store'
 
 class UserModal extends React.Component {
    state = {

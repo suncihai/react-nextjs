@@ -1,6 +1,6 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import Partners from '../components/Partners'
+import Layout from '../components/layout/Layout'
+import Partners from '../components/partners/Partners'
 import styled from 'styled-components'
 import bannerImg from '../assets/img/partners_bg.jpg'
 
