@@ -75,7 +75,20 @@ const ContentWrap = styled.div`
                height: 580px;
                overflow: hidden;
                img {
+                 position: absolute;
                  width: 257px;
+                 visibility:hidden;
+                 opacity: 0;
+                 &.appFade1 {
+                    transition: opacity 1.5s ease-in;
+                    z-index: 2;
+                    opacity: 1;
+                    visibility: visible;
+                 }
+                 &.appFade2 {
+                    opacity: 1;
+                    visibility: visible;
+               }
                }
             }
          }
@@ -115,6 +128,7 @@ const StoryWrapper = styled.div`
    font-size:40px;
    color: #fff;
    white-space: nowrap;
+   z-index: 51;
 `
 
 const Mask = styled.div`
@@ -283,9 +297,9 @@ const About = () => {
                <div className="right-box">
                   <div className="phone-bg">
                     <div className="container">
-                       <img className={app1 == 0 ? 'appFadeIn' : 'appFadeOut'} src={phonec1} />
-                       <img className={app1 == 1 ? 'appFadeIn' : 'appFadeOut'} src={phonec2} />
-                       <img className={app1 == 2 ? 'appFadeIn' : 'appFadeOut'} src={phonec3} />
+                       <img className={cx({'appFade1':app1 == 0,'appFade2':app1 == 1})} src={phonec1} />
+                       <img className={cx({'appFade1':app1 == 1,'appFade2':app1 ==2})} src={phonec2} />
+                       <img className={cx({'appFade1':app1 == 2,'appFade2':app1 == 0})} src={phonec3} />
                     </div>
                   </div>
                </div>

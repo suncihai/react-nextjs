@@ -276,7 +276,7 @@ var AboutBody = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.wi
 var ContentWrap = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__ContentWrap",
   componentId: "sc-1xephd0-1"
-})(["height:100vh;width:100vw;.main-box{width:1200px;margin:0 auto;display:flex;justify-content:space-around;.left-box{padding-top:200px;display:inline-block;width:600px;vertical-align:top;h2{font-size:50px;margin-bottom:25px;font-family:'DIN-Bold';letter-spacing:1px;line-height:1.2;}p{font-size:16px;letter-spacing:1.2px;margin-bottom:30px;}.ant-input-group{width:400px;margin-bottom:40px;}img.ios{margin-right:10px;}}.right-box{display:inline-block;vertical-align:top;padding-top:150px;.phone-bg{width:300px;height:600px;background-image:url(", ");background-size:cover;padding:22px;overflow:hidden;.container{height:580px;overflow:hidden;img{width:257px;}}}}}&.top{}&.intro{background:linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);position:relative;.right-box{img{width:550px;position:relative;}}}"], _assets_img_iphoneX_png__WEBPACK_IMPORTED_MODULE_11___default.a);
+})(["height:100vh;width:100vw;.main-box{width:1200px;margin:0 auto;display:flex;justify-content:space-around;.left-box{padding-top:200px;display:inline-block;width:600px;vertical-align:top;h2{font-size:50px;margin-bottom:25px;font-family:'DIN-Bold';letter-spacing:1px;line-height:1.2;}p{font-size:16px;letter-spacing:1.2px;margin-bottom:30px;}.ant-input-group{width:400px;margin-bottom:40px;}img.ios{margin-right:10px;}}.right-box{display:inline-block;vertical-align:top;padding-top:150px;.phone-bg{width:300px;height:600px;background-image:url(", ");background-size:cover;padding:22px;overflow:hidden;.container{height:580px;overflow:hidden;img{position:absolute;width:257px;visibility:hidden;opacity:0;&.appFade1{transition:opacity 1.5s ease-in;z-index:2;opacity:1;visibility:visible;}&.appFade2{opacity:1;visibility:visible;}}}}}}&.top{}&.intro{background:linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);position:relative;.right-box{img{width:550px;position:relative;}}}"], _assets_img_iphoneX_png__WEBPACK_IMPORTED_MODULE_11___default.a);
 var VideoWrapper = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__VideoWrapper",
   componentId: "sc-1xephd0-2"
@@ -284,7 +284,7 @@ var VideoWrapper = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div
 var StoryWrapper = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__StoryWrapper",
   componentId: "sc-1xephd0-3"
-})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;white-space:nowrap;"]);
+})(["position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:40px;color:#fff;white-space:nowrap;z-index:51;"]);
 var Mask = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__Mask",
   componentId: "sc-1xephd0-4"
@@ -451,13 +451,22 @@ var About = function About() {
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
-    className: app1 == 0 ? 'appFadeIn' : 'appFadeOut',
+    className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+      'appFade1': app1 == 0,
+      'appFade2': app1 == 1
+    }),
     src: _assets_img_phone_c1_png__WEBPACK_IMPORTED_MODULE_14___default.a
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
-    className: app1 == 1 ? 'appFadeIn' : 'appFadeOut',
+    className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+      'appFade1': app1 == 1,
+      'appFade2': app1 == 2
+    }),
     src: _assets_img_phone_c2_png__WEBPACK_IMPORTED_MODULE_15___default.a
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
-    className: app1 == 2 ? 'appFadeIn' : 'appFadeOut',
+    className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+      'appFade1': app1 == 2,
+      'appFade2': app1 == 0
+    }),
     src: _assets_img_phone_c3_png__WEBPACK_IMPORTED_MODULE_16___default.a
   })))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ContentWrap, {
     className: "intro"
