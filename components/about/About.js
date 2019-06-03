@@ -30,6 +30,8 @@ const AboutBody = styled.div`
 const ContentWrap = styled.div`
    height: 100vh;
    width: 100vw;
+   transition: background 0.5s ease-in;
+   background: #fff;
    .main-box {
       width: 1200px;
       margin: 0 auto;
@@ -95,15 +97,24 @@ const ContentWrap = styled.div`
       }
    }
    &.top {
-      
+      background: linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);
    }
    &.intro {
-      background: linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);
       position: relative;
       .right-box {
          img {
             width: 550px;
             position: relative;
+         }
+      }
+   }
+   &.dark {
+      background: #2c2c2c;
+      .main-box {
+         .left-box {
+            h2, p {
+               color: #fff;
+            }
          }
       }
    }
@@ -285,7 +296,7 @@ const About = () => {
             }
             </ul>
          </SideBar>
-         <ContentWrap className="top">
+         <ContentWrap className={cx({'top':true,'dark':light})}>
            <div className="main-box">
                <div className="left-box">
                   <h2>BitMart to the Moon!</h2>
@@ -305,7 +316,7 @@ const About = () => {
                </div>
            </div>
          </ContentWrap>
-         <ContentWrap className="intro">
+         <ContentWrap className={cx({'intro':true,'dark':light})}>
          <div className="main-box">
                <div className="left-box">
                   <h2>Powering the future of crypto payments</h2>

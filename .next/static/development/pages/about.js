@@ -276,7 +276,7 @@ var AboutBody = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.wi
 var ContentWrap = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__ContentWrap",
   componentId: "sc-1xephd0-1"
-})(["height:100vh;width:100vw;.main-box{width:1200px;margin:0 auto;display:flex;justify-content:space-around;.left-box{padding-top:200px;display:inline-block;width:600px;vertical-align:top;h2{font-size:50px;margin-bottom:25px;font-family:'DIN-Bold';letter-spacing:1px;line-height:1.2;}p{font-size:16px;letter-spacing:1.2px;margin-bottom:30px;}.ant-input-group{width:400px;margin-bottom:40px;}img.ios{margin-right:10px;}}.right-box{display:inline-block;vertical-align:top;padding-top:150px;.phone-bg{width:300px;height:600px;background-image:url(", ");background-size:cover;padding:22px;overflow:hidden;.container{height:580px;overflow:hidden;img{position:absolute;width:257px;visibility:hidden;opacity:0;&.appFade1{transition:opacity 1.5s ease-in;z-index:2;opacity:1;visibility:visible;}&.appFade2{opacity:1;visibility:visible;}}}}}}&.top{}&.intro{background:linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);position:relative;.right-box{img{width:550px;position:relative;}}}"], _assets_img_iphoneX_png__WEBPACK_IMPORTED_MODULE_11___default.a);
+})(["height:100vh;width:100vw;transition:background 0.5s ease-in;background:#fff;.main-box{width:1200px;margin:0 auto;display:flex;justify-content:space-around;.left-box{padding-top:200px;display:inline-block;width:600px;vertical-align:top;h2{font-size:50px;margin-bottom:25px;font-family:'DIN-Bold';letter-spacing:1px;line-height:1.2;}p{font-size:16px;letter-spacing:1.2px;margin-bottom:30px;}.ant-input-group{width:400px;margin-bottom:40px;}img.ios{margin-right:10px;}}.right-box{display:inline-block;vertical-align:top;padding-top:150px;.phone-bg{width:300px;height:600px;background-image:url(", ");background-size:cover;padding:22px;overflow:hidden;.container{height:580px;overflow:hidden;img{position:absolute;width:257px;visibility:hidden;opacity:0;&.appFade1{transition:opacity 1.5s ease-in;z-index:2;opacity:1;visibility:visible;}&.appFade2{opacity:1;visibility:visible;}}}}}}&.top{background:linear-gradient(145deg,#fff 10%,#ebf4ff 60%,#69b2ff 150%);}&.intro{position:relative;.right-box{img{width:550px;position:relative;}}}&.dark{background:#2c2c2c;.main-box{.left-box{h2,p{color:#fff;}}}}"], _assets_img_iphoneX_png__WEBPACK_IMPORTED_MODULE_11___default.a);
 var VideoWrapper = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "About__VideoWrapper",
   componentId: "sc-1xephd0-2"
@@ -430,7 +430,10 @@ var About = function About() {
       key: index
     }, ele.bar);
   }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ContentWrap, {
-    className: "top"
+    className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+      'top': true,
+      'dark': light
+    })
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "main-box"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -469,7 +472,10 @@ var About = function About() {
     }),
     src: _assets_img_phone_c3_png__WEBPACK_IMPORTED_MODULE_16___default.a
   })))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ContentWrap, {
-    className: "intro"
+    className: classname__WEBPACK_IMPORTED_MODULE_6___default()({
+      'intro': true,
+      'dark': light
+    })
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "main-box"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
