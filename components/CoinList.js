@@ -7,6 +7,8 @@ import Loading from '../components/layout/Loading'
 import { connect } from 'react-redux'
 import { cryptoApiUrl, cryptoStreamUrl } from '../common/js/const'
 import { getCoinPrice } from '../store'
+import { Table } from 'antd'
+import Column from 'antd/lib/table/Column';
 import cx from 'classname'
 import {Sparklines,SparklinesLine,SparklinesReferenceLine} from 'react-sparklines';
 
@@ -144,7 +146,7 @@ class CoinList extends React.Component {
         else if (message[4] === "2") {
           coin.isUp = false
           coin.isDown = true
-        }
+        } 
   
         this.updateCoin(coin, coins)
       }
@@ -171,8 +173,8 @@ class CoinList extends React.Component {
         This will allow tick animations be reapplied and play again.
       */
       window.setTimeout(() => {
-        coins[coin.name].isUp = false
-        coins[coin.name].isDown = false
+        // coins[coin.name].isUp = false
+        // coins[coin.name].isDown = false
         this.props.getCoinPrice(coins)
       }, 500)
     }
@@ -189,6 +191,8 @@ class CoinList extends React.Component {
            width: '1000px',
            height: '200px'
          }
+
+         const coins = Object.values(this.props.coins)
          
          return (
            <>
@@ -200,12 +204,32 @@ class CoinList extends React.Component {
                  <div className="max">${_.max(this.state.btcData)}</div>
                  <div className="min">${_.min(this.state.btcData)}</div>
                </div>
+               {/* tile model  */}
                { Object.values(this.props.coins).map(ele =>
-                  <CoinWrap key={ele.name} className={cx({'tickGreen':ele.isUp,'tickRed':ele.isDown})}>
+                  <CoinWrap key={ele.name} className={cx({'green tickGreen':ele.isUp,'red tickRed':ele.isDown})}>
                      <div>{ele.name}</div>
                      <div>${ele.price}</div>
                   </CoinWrap>
                )}
+               {/* <Table dataSource={coins} rowKey={coins => coins.name} pagination={false}>
+                  <Column 
+                    title="#" 
+                    key="index"
+                    render={(text, coin, index) => (
+                      <span>
+                        {index+1}
+                      </span>
+                   )}/>
+                  <Column title="Coin Name" dataIndex="name" key="name"></Column>
+                  <Column 
+                  title="Coin Price" 
+                  key="price"
+                  render={(text, coin) => (
+                     <span className={cx({'green':coin.isUp,'red':coin.isDown})}>
+                      {coin.price}
+                     </span>
+                   )}/>
+               </Table> */}
             </CoinListContainer>
            </>
          )

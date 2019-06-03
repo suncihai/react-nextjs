@@ -35,6 +35,12 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'DIN-Bold';
     src: url('../../assets/iconfont/DIN/DIN-Bold.otf');
   }
+  .green {
+     color: #8bc34a;
+  }
+  .red {
+     color: #f44336;
+  }
   .tickGreen {
     -webkit-animation: GREEN-FADE 1s ;
     -moz-animation:    GREEN-FADE 1s ;
@@ -51,35 +57,43 @@ export const GlobalStyle = createGlobalStyle`
     text-align: left;
   }
   @-webkit-keyframes GREEN-FADE {
-    0%   { background-color: #8bc34a; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @-moz-keyframes GREEN-FADE {
-    0%   { background-color: #8bc34a; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @-o-keyframes GREEN-FADE {
-    0%   { background-color: #8bc34a; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @keyframes GREEN-FADE {
-    0%   { background-color: #8bc34a; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @-webkit-keyframes RED-FADE {
-    0%   { background-color: #f44336; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @-moz-keyframes RED-FADE {
-    0%   { background-color: #f44336; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @-o-keyframes RED-FADE {
-    0%   { background-color: #f44336; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
   @keyframes RED-FADE {
-    0%   { background-color: #f44336; }
-    100% { background-color: transparent; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0;}
+    100% { opacity: 1; }
   }
 `

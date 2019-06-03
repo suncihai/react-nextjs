@@ -55,28 +55,26 @@
   ],
   "./index.css": [
     {
+      "id": "./node_modules/antd/lib/carousel/style/index.css",
+      "name": "./node_modules/antd/lib/carousel/style/index.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
       "id": "./node_modules/antd/lib/divider/style/index.css",
       "name": "./node_modules/antd/lib/divider/style/index.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": "./node_modules/antd/lib/input/style/index.css",
-      "name": "./node_modules/antd/lib/input/style/index.css",
+      "id": "./node_modules/antd/lib/icon/style/index.css",
+      "name": "./node_modules/antd/lib/icon/style/index.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": "./node_modules/antd/lib/button/style/index.css",
-      "name": "./node_modules/antd/lib/button/style/index.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "../../common/css/animation.css": [
-    {
-      "id": "./common/css/animation.css",
-      "name": "./common/css/animation.css",
+      "id": "./node_modules/antd/lib/spin/style/index.css",
+      "name": "./node_modules/antd/lib/spin/style/index.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
